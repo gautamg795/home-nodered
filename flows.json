@@ -43,17 +43,6 @@
         "color": "#DDAA99"
     },
     {
-        "id": "46fdc219.6f8b6c",
-        "type": "subflow",
-        "name": "Morning Disable Motion Block",
-        "info": "",
-        "category": "",
-        "in": [],
-        "out": [],
-        "env": [],
-        "color": "#DDAA99"
-    },
-    {
         "id": "940272e0.e7353",
         "type": "subflow",
         "name": "Handle Hue Remote",
@@ -272,7 +261,9 @@
             "e1916eea.6ed24"
         ],
         "x": 1234,
-        "y": 119
+        "y": 119,
+        "w": 212,
+        "h": 162
     },
     {
         "id": "391f89a3.583ed6",
@@ -568,122 +559,6 @@
             ],
             [
                 "ecd28444.449b48"
-            ]
-        ]
-    },
-    {
-        "id": "42c900f7.a0f3a",
-        "type": "server-state-changed",
-        "z": "46fdc219.6f8b6c",
-        "name": "",
-        "server": "391f89a3.583ed6",
-        "version": 1,
-        "exposeToHomeAssistant": false,
-        "haConfig": [
-            {
-                "property": "name",
-                "value": ""
-            },
-            {
-                "property": "icon",
-                "value": ""
-            }
-        ],
-        "entityidfilter": "input_boolean.bedtime_block_motion",
-        "entityidfiltertype": "exact",
-        "outputinitially": false,
-        "state_type": "str",
-        "haltifstate": "on",
-        "halt_if_type": "str",
-        "halt_if_compare": "is",
-        "outputs": 2,
-        "output_only_on_state_change": true,
-        "x": 200,
-        "y": 80,
-        "wires": [
-            [
-                "82ebe77a.e91568"
-            ],
-            [
-                "1d6f363c.4bc94a"
-            ]
-        ]
-    },
-    {
-        "id": "82ebe77a.e91568",
-        "type": "ha-wait-until",
-        "z": "46fdc219.6f8b6c",
-        "name": "wait until sun is setting",
-        "server": "391f89a3.583ed6",
-        "outputs": 1,
-        "entityId": "sun.sun",
-        "entityIdFilterType": "exact",
-        "property": "attributes.rising",
-        "comparator": "is",
-        "value": "false",
-        "valueType": "bool",
-        "timeout": 0,
-        "timeoutType": "num",
-        "timeoutUnits": "seconds",
-        "entityLocation": "",
-        "entityLocationType": "none",
-        "checkCurrentState": false,
-        "blockInputOverrides": true,
-        "x": 740,
-        "y": 80,
-        "wires": [
-            [
-                "28946aa1.4c6a66"
-            ]
-        ]
-    },
-    {
-        "id": "28946aa1.4c6a66",
-        "type": "api-call-service",
-        "z": "46fdc219.6f8b6c",
-        "name": "disable motion block",
-        "server": "391f89a3.583ed6",
-        "version": 1,
-        "debugenabled": false,
-        "service_domain": "input_boolean",
-        "service": "turn_off",
-        "entityId": "input_boolean.bedtime_block_motion",
-        "data": "",
-        "dataType": "json",
-        "mergecontext": "",
-        "output_location": "",
-        "output_location_type": "none",
-        "mustacheAltTags": false,
-        "x": 980,
-        "y": 80,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "1d6f363c.4bc94a",
-        "type": "change",
-        "z": "46fdc219.6f8b6c",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "reset",
-                "pt": "msg",
-                "to": "true",
-                "tot": "bool"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 520,
-        "y": 100,
-        "wires": [
-            [
-                "82ebe77a.e91568"
             ]
         ]
     },
@@ -1069,16 +944,6 @@
             ],
             []
         ]
-    },
-    {
-        "id": "a90dcc10.c3937",
-        "type": "subflow:46fdc219.6f8b6c",
-        "z": "ba8902ff.b6359",
-        "name": "Morning Clear Motion Block",
-        "env": [],
-        "x": 200,
-        "y": 100,
-        "wires": []
     },
     {
         "id": "4c156b2d.d92d74",
@@ -3563,6 +3428,113 @@
                 "58ed0332.c37c1c"
             ],
             []
+        ]
+    },
+    {
+        "id": "f99e9d07.0a5a9",
+        "type": "api-call-service",
+        "z": "ba8902ff.b6359",
+        "name": "disable motion block",
+        "server": "391f89a3.583ed6",
+        "version": 1,
+        "debugenabled": false,
+        "service_domain": "input_boolean",
+        "service": "turn_off",
+        "entityId": "input_boolean.bedtime_block_motion",
+        "data": "",
+        "dataType": "json",
+        "mergecontext": "",
+        "output_location": "",
+        "output_location_type": "none",
+        "mustacheAltTags": false,
+        "x": 380,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c1e0e47d.cde4a8",
+        "type": "time-inject",
+        "z": "ba8902ff.b6359",
+        "name": "noon + 2 hours",
+        "nameInt": "⏲ solar noon↷ = timestamp",
+        "positionConfig": "c5cbf783.6e13c8",
+        "props": [
+            {
+                "p": "",
+                "pt": "msgPayload",
+                "v": "",
+                "vt": "date",
+                "o": "",
+                "oT": "none",
+                "oM": "60000",
+                "f": 0,
+                "fS": 0,
+                "fT": "UNIX timestamp (ms)",
+                "fI": "0",
+                "next": true,
+                "days": ""
+            },
+            {
+                "p": "",
+                "pt": "msgTopic",
+                "v": "",
+                "vt": "str",
+                "o": "",
+                "oT": "none",
+                "oM": "60000",
+                "f": 0,
+                "fS": 0,
+                "fT": "UNIX timestamp (ms)",
+                "fI": "0",
+                "next": false,
+                "days": ""
+            }
+        ],
+        "injectTypeSelect": "time",
+        "intervalCount": 1,
+        "intervalCountType": "num",
+        "intervalCountMultiplier": 60000,
+        "time": "solarNoon",
+        "timeType": "pdsTime",
+        "offset": "2",
+        "offsetType": "num",
+        "offsetMultiplier": 3600000,
+        "timeEnd": "",
+        "timeEndType": "entered",
+        "timeEndOffset": 0,
+        "timeEndOffsetType": "none",
+        "timeEndOffsetMultiplier": 60000,
+        "timeDays": "*",
+        "timeOnlyOddDays": false,
+        "timeOnlyEvenDays": false,
+        "timeMonths": "*",
+        "timedatestart": "",
+        "timedateend": "",
+        "property": "",
+        "propertyType": "none",
+        "propertyCompare": "true",
+        "propertyThreshold": "",
+        "propertyThresholdType": "num",
+        "timeAlt": "",
+        "timeAltType": "entered",
+        "timeAltDays": "*",
+        "timeAltOnlyOddDays": false,
+        "timeAltOnlyEvenDays": false,
+        "timeAltMonths": "*",
+        "timeAltOffset": 0,
+        "timeAltOffsetType": "none",
+        "timeAltOffsetMultiplier": 60000,
+        "once": false,
+        "onceDelay": 0.1,
+        "recalcTime": 2,
+        "x": 180,
+        "y": 180,
+        "wires": [
+            [
+                "f99e9d07.0a5a9"
+            ]
         ]
     }
 ]
