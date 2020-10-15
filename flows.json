@@ -3447,7 +3447,7 @@
         "output_location": "",
         "output_location_type": "none",
         "mustacheAltTags": false,
-        "x": 380,
+        "x": 520,
         "y": 180,
         "wires": [
             []
@@ -3533,8 +3533,37 @@
         "y": 180,
         "wires": [
             [
-                "f99e9d07.0a5a9"
+                "34985654.ef58ca"
             ]
+        ]
+    },
+    {
+        "id": "34985654.ef58ca",
+        "type": "ha-wait-until",
+        "z": "ba8902ff.b6359",
+        "name": "",
+        "server": "391f89a3.583ed6",
+        "outputs": 2,
+        "entityId": "person.gautam",
+        "entityIdFilterType": "exact",
+        "property": "state",
+        "comparator": "is",
+        "value": "home",
+        "valueType": "str",
+        "timeout": "12",
+        "timeoutType": "num",
+        "timeoutUnits": "hours",
+        "entityLocation": "",
+        "entityLocationType": "none",
+        "checkCurrentState": true,
+        "blockInputOverrides": true,
+        "x": 340,
+        "y": 180,
+        "wires": [
+            [
+                "f99e9d07.0a5a9"
+            ],
+            []
         ]
     }
 ]
