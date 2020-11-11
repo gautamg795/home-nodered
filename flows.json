@@ -45,21 +45,22 @@
     {
         "id": "940272e0.e7353",
         "type": "subflow",
-        "name": "Handle Hue Remote",
+        "name": "Handle Dimmer Remote",
         "info": "",
         "category": "",
-        "in": [
+        "in": [],
+        "out": [
             {
-                "x": 80,
-                "y": 360,
+                "x": 420,
+                "y": 240,
                 "wires": [
                     {
-                        "id": "195dd0fa.1fa76f"
+                        "id": "b4c177ae.72f8f8",
+                        "port": 0
                     }
                 ]
             }
         ],
-        "out": [],
         "env": [],
         "color": "#DDAA99"
     },
@@ -109,42 +110,6 @@
         "out": [],
         "env": [],
         "color": "#DDAA99"
-    },
-    {
-        "id": "41dc8be3.68fa24",
-        "type": "subflow",
-        "name": "Zigbee Event",
-        "info": "",
-        "category": "",
-        "in": [],
-        "out": [
-            {
-                "x": 500,
-                "y": 60,
-                "wires": [
-                    {
-                        "id": "4cafea0f.2adc04",
-                        "port": 0
-                    }
-                ]
-            },
-            {
-                "x": 500,
-                "y": 100,
-                "wires": [
-                    {
-                        "id": "4cafea0f.2adc04",
-                        "port": 1
-                    }
-                ]
-            }
-        ],
-        "env": [],
-        "color": "#DDAA99",
-        "outputLabels": [
-            "Hue Remote",
-            "SmartThings Button"
-        ]
     },
     {
         "id": "627ae423.cdc09c",
@@ -227,17 +192,7 @@
         "name": "Handle SmartThings Button",
         "info": "",
         "category": "",
-        "in": [
-            {
-                "x": 20,
-                "y": 100,
-                "wires": [
-                    {
-                        "id": "2030783c.ef0758"
-                    }
-                ]
-            }
-        ],
+        "in": [],
         "out": [],
         "env": [],
         "color": "#DDAA99"
@@ -268,7 +223,6 @@
     {
         "id": "391f89a3.583ed6",
         "type": "server",
-        "z": "",
         "name": "Home Assistant",
         "legacy": false,
         "addon": false,
@@ -280,7 +234,6 @@
     {
         "id": "c5cbf783.6e13c8",
         "type": "position-config",
-        "z": "",
         "name": "",
         "isValide": "true",
         "longitude": "0",
@@ -445,120 +398,6 @@
         "wires": [
             [
                 "c6ada3c9.2809f"
-            ]
-        ]
-    },
-    {
-        "id": "e7006f4f.8e16b",
-        "type": "server-events",
-        "z": "41dc8be3.68fa24",
-        "name": "zigbee event",
-        "server": "391f89a3.583ed6",
-        "event_type": "zha_event",
-        "exposeToHomeAssistant": false,
-        "haConfig": [
-            {
-                "property": "name",
-                "value": ""
-            },
-            {
-                "property": "icon",
-                "value": ""
-            }
-        ],
-        "waitForRunning": true,
-        "x": 170,
-        "y": 80,
-        "wires": [
-            [
-                "4cafea0f.2adc04"
-            ]
-        ]
-    },
-    {
-        "id": "4cafea0f.2adc04",
-        "type": "switch",
-        "z": "41dc8be3.68fa24",
-        "name": "is hue remote",
-        "property": "payload.event.device_ieee",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "00:17:88:01:03:cb:7c:aa",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "28:6d:97:00:01:0b:fa:7c",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 360,
-        "y": 80,
-        "wires": [
-            [],
-            []
-        ]
-    },
-    {
-        "id": "195dd0fa.1fa76f",
-        "type": "switch",
-        "z": "940272e0.e7353",
-        "name": "",
-        "property": "payload.event.command",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "on_short_release",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "off_short_release",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "off_hold",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "up_short_release",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "down_short_release",
-                "vt": "str"
-            }
-        ],
-        "checkall": "false",
-        "repair": false,
-        "outputs": 5,
-        "x": 210,
-        "y": 360,
-        "wires": [
-            [
-                "aea0917b.51941"
-            ],
-            [
-                "14729e53.457182",
-                "4a6ef134.bc3ea"
-            ],
-            [
-                "178ae963.37e2f7"
-            ],
-            [
-                "3ed3ba68.ac16c6"
-            ],
-            [
-                "ecd28444.449b48"
             ]
         ]
     },
@@ -1506,8 +1345,8 @@
         "output_location": "",
         "output_location_type": "none",
         "mustacheAltTags": false,
-        "x": 780,
-        "y": 220,
+        "x": 840,
+        "y": 140,
         "wires": [
             [
                 "3fb15b3.ab24ba4"
@@ -1529,8 +1368,8 @@
         "randomLast": "5",
         "randomUnits": "seconds",
         "drop": false,
-        "x": 970,
-        "y": 220,
+        "x": 1020,
+        "y": 140,
         "wires": [
             [
                 "cbaffdc4.8014e"
@@ -1554,8 +1393,8 @@
         "output_location": "",
         "output_location_type": "none",
         "mustacheAltTags": false,
-        "x": 1160,
-        "y": 220,
+        "x": 1200,
+        "y": 140,
         "wires": [
             []
         ]
@@ -1784,52 +1623,6 @@
         ]
     },
     {
-        "id": "3ed3ba68.ac16c6",
-        "type": "api-call-service",
-        "z": "940272e0.e7353",
-        "name": "",
-        "server": "391f89a3.583ed6",
-        "version": 1,
-        "debugenabled": false,
-        "service_domain": "light",
-        "service": "turn_on",
-        "entityId": "light.bedside_lamp",
-        "data": "{ \"brightness_step_pct\": 10 }",
-        "dataType": "json",
-        "mergecontext": "",
-        "output_location": "",
-        "output_location_type": "none",
-        "mustacheAltTags": false,
-        "x": 770,
-        "y": 500,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "ecd28444.449b48",
-        "type": "api-call-service",
-        "z": "940272e0.e7353",
-        "name": "",
-        "server": "391f89a3.583ed6",
-        "version": 1,
-        "debugenabled": false,
-        "service_domain": "light",
-        "service": "turn_on",
-        "entityId": "light.bedside_lamp",
-        "data": "{ \"brightness_step_pct\": -10 }",
-        "dataType": "json",
-        "mergecontext": "",
-        "output_location": "",
-        "output_location_type": "none",
-        "mustacheAltTags": false,
-        "x": 770,
-        "y": 540,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "bd529406.6df2c8",
         "type": "function",
         "z": "5d61e676.b8f7c8",
@@ -1851,9 +1644,13 @@
         "id": "f80da0a8.6a63c",
         "type": "subflow:940272e0.e7353",
         "z": "ba8902ff.b6359",
-        "x": 600,
-        "y": 380,
-        "wires": []
+        "x": 210,
+        "y": 320,
+        "wires": [
+            [
+                "96be4a72.7eace8"
+            ]
+        ]
     },
     {
         "id": "4e9a16bb.c9eeb8",
@@ -2539,22 +2336,6 @@
         ]
     },
     {
-        "id": "373367d7.8908d8",
-        "type": "subflow:41dc8be3.68fa24",
-        "z": "ba8902ff.b6359",
-        "x": 210,
-        "y": 320,
-        "wires": [
-            [
-                "96be4a72.7eace8",
-                "f80da0a8.6a63c"
-            ],
-            [
-                "137eac46.d56f24"
-            ]
-        ]
-    },
-    {
         "id": "80bb5cec.59a9",
         "type": "api-call-service",
         "z": "627ae423.cdc09c",
@@ -2584,7 +2365,7 @@
         "name": "main light off",
         "server": "391f89a3.583ed6",
         "version": 1,
-        "debugenabled": true,
+        "debugenabled": false,
         "service_domain": "switch",
         "service": "turn_off",
         "entityId": "switch.bedroom_light",
@@ -2614,8 +2395,9 @@
         "type": "subflow:627ae423.cdc09c",
         "z": "940272e0.e7353",
         "name": "",
-        "x": 760,
-        "y": 260,
+        "env": [],
+        "x": 820,
+        "y": 100,
         "wires": []
     },
     {
@@ -2648,7 +2430,7 @@
         "name": "main light off",
         "server": "391f89a3.583ed6",
         "version": 1,
-        "debugenabled": true,
+        "debugenabled": false,
         "service_domain": "switch",
         "service": "turn_off",
         "entityId": "switch.bedroom_light",
@@ -2669,8 +2451,8 @@
         "type": "subflow:d172023.57b02",
         "z": "940272e0.e7353",
         "name": "",
-        "x": 750,
-        "y": 380,
+        "x": 810,
+        "y": 200,
         "wires": []
     },
     {
@@ -2748,7 +2530,7 @@
         "z": "940272e0.e7353",
         "name": "",
         "x": 760,
-        "y": 120,
+        "y": 40,
         "wires": []
     },
     {
@@ -2770,8 +2552,8 @@
         "entity_location": "data",
         "override_data": "msg",
         "blockInputOverrides": false,
-        "x": 390,
-        "y": 100,
+        "x": 770,
+        "y": 160,
         "wires": [
             [
                 "fd562c7b.ee553"
@@ -2786,8 +2568,8 @@
         "type": "subflow:d172023.57b02",
         "z": "72c4b6a2.30e0a8",
         "name": "",
-        "x": 590,
-        "y": 80,
+        "x": 970,
+        "y": 140,
         "wires": []
     },
     {
@@ -2809,8 +2591,8 @@
         "entity_location": "data",
         "override_data": "msg",
         "blockInputOverrides": false,
-        "x": 680,
-        "y": 120,
+        "x": 1060,
+        "y": 180,
         "wires": [
             [
                 "18b2a14e.9d68ef"
@@ -2825,8 +2607,8 @@
         "type": "subflow:627ae423.cdc09c",
         "z": "72c4b6a2.30e0a8",
         "name": "",
-        "x": 940,
-        "y": 100,
+        "x": 1320,
+        "y": 160,
         "wires": []
     },
     {
@@ -2834,8 +2616,8 @@
         "type": "subflow:d172023.57b02",
         "z": "72c4b6a2.30e0a8",
         "name": "",
-        "x": 930,
-        "y": 140,
+        "x": 1310,
+        "y": 200,
         "wires": []
     },
     {
@@ -2860,8 +2642,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 170,
-        "y": 100,
+        "x": 550,
+        "y": 160,
         "wires": [
             [
                 "e6a8c804.a31338"
@@ -2875,8 +2657,8 @@
         "id": "137eac46.d56f24",
         "type": "subflow:72c4b6a2.30e0a8",
         "z": "ba8902ff.b6359",
-        "x": 620,
-        "y": 420,
+        "x": 220,
+        "y": 360,
         "wires": []
     },
     {
@@ -2884,8 +2666,8 @@
         "type": "subflow:e57f4074.d8fa3",
         "z": "72c4b6a2.30e0a8",
         "name": "",
-        "x": 380,
-        "y": 180,
+        "x": 760,
+        "y": 240,
         "wires": []
     },
     {
@@ -3564,6 +3346,181 @@
                 "f99e9d07.0a5a9"
             ],
             []
+        ]
+    },
+    {
+        "id": "ca564400.ef6808",
+        "type": "server-events",
+        "z": "940272e0.e7353",
+        "name": "zwave scene activated",
+        "server": "391f89a3.583ed6",
+        "event_type": "zwave.scene_activated",
+        "exposeToHomeAssistant": false,
+        "haConfig": [
+            {
+                "property": "name",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            }
+        ],
+        "waitForRunning": true,
+        "x": 100,
+        "y": 140,
+        "wires": [
+            [
+                "b4c177ae.72f8f8"
+            ]
+        ]
+    },
+    {
+        "id": "b4c177ae.72f8f8",
+        "type": "switch",
+        "z": "940272e0.e7353",
+        "name": "is dimmer switch",
+        "property": "payload.entity_id",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "zwave.dimmer_switch",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 310,
+        "y": 140,
+        "wires": [
+            [
+                "b32c3cd6.7cd14"
+            ]
+        ]
+    },
+    {
+        "id": "b32c3cd6.7cd14",
+        "type": "switch",
+        "z": "940272e0.e7353",
+        "name": "",
+        "property": "payload.event.scene_id",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "2",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 470,
+        "y": 140,
+        "wires": [
+            [
+                "aea0917b.51941"
+            ],
+            [
+                "469baa1e.2581d4"
+            ]
+        ]
+    },
+    {
+        "id": "469baa1e.2581d4",
+        "type": "switch",
+        "z": "940272e0.e7353",
+        "name": "",
+        "property": "payload.event.scene_data",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "2",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 590,
+        "y": 180,
+        "wires": [
+            [
+                "14729e53.457182",
+                "4a6ef134.bc3ea"
+            ],
+            [
+                "178ae963.37e2f7"
+            ]
+        ],
+        "outputLabels": [
+            "short press down",
+            "long press down"
+        ]
+    },
+    {
+        "id": "65f223f2.356f7c",
+        "type": "server-events",
+        "z": "72c4b6a2.30e0a8",
+        "name": "zigbee event",
+        "server": "391f89a3.583ed6",
+        "event_type": "zha_event",
+        "exposeToHomeAssistant": false,
+        "haConfig": [
+            {
+                "property": "name",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            }
+        ],
+        "waitForRunning": true,
+        "x": 110,
+        "y": 160,
+        "wires": [
+            [
+                "bd62d1cc.d8f03"
+            ]
+        ]
+    },
+    {
+        "id": "bd62d1cc.d8f03",
+        "type": "switch",
+        "z": "72c4b6a2.30e0a8",
+        "name": "is smartthings button",
+        "property": "payload.event.device_ieee",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "28:6d:97:00:01:0b:fa:7c",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 320,
+        "y": 160,
+        "wires": [
+            [
+                "2030783c.ef0758"
+            ]
         ]
     }
 ]
