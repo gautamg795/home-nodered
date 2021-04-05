@@ -171,13 +171,13 @@
                 "y": 180,
                 "wires": [
                     {
-                        "id": "43ba5ccf.3fc274"
-                    },
-                    {
                         "id": "75645783.947148"
                     },
                     {
                         "id": "519fa747.834e78"
+                    },
+                    {
+                        "id": "43ba5ccf.3fc274"
                     }
                 ]
             }
@@ -287,7 +287,7 @@
         "z": "26e3222a.ef8a1e",
         "name": "",
         "pauseType": "delay",
-        "timeout": "5",
+        "timeout": "2",
         "timeoutUnits": "seconds",
         "rate": "1",
         "nbRateUnits": "1",
@@ -1236,7 +1236,7 @@
         "halt_if_type": "str",
         "halt_if_compare": "is",
         "override_topic": true,
-        "entity_id": "switch.bedroom_light",
+        "entity_id": "light.bedroom_light",
         "state_type": "habool",
         "state_location": "payload",
         "override_payload": "msg",
@@ -1549,7 +1549,7 @@
         "server": "391f89a3.583ed6",
         "startdate": "",
         "enddate": "",
-        "entityid": "switch.bedroom_light",
+        "entityid": "light.bedroom_light",
         "entityidtype": "is",
         "useRelativeTime": true,
         "relativeTime": "10 seconds",
@@ -2094,14 +2094,14 @@
         "id": "709b926b.b3d5dc",
         "type": "api-call-service",
         "z": "79fa72c5.6e4ccc",
-        "name": "open blinds 80%",
+        "name": "open blinds 85%",
         "server": "391f89a3.583ed6",
         "version": 1,
         "debugenabled": false,
         "service_domain": "cover",
         "service": "set_cover_position",
         "entityId": "cover.living_room_window",
-        "data": "{\"position\": 80}",
+        "data": "{\"position\": 85}",
         "dataType": "json",
         "mergecontext": "",
         "output_location": "",
@@ -2534,93 +2534,6 @@
         "wires": []
     },
     {
-        "id": "e6a8c804.a31338",
-        "type": "api-current-state",
-        "z": "72c4b6a2.30e0a8",
-        "name": "check if light is on",
-        "server": "391f89a3.583ed6",
-        "version": 1,
-        "outputs": 2,
-        "halt_if": "on",
-        "halt_if_type": "str",
-        "halt_if_compare": "is",
-        "override_topic": false,
-        "entity_id": "light.bedroom_light",
-        "state_type": "str",
-        "state_location": "payload",
-        "override_payload": "msg",
-        "entity_location": "data",
-        "override_data": "msg",
-        "blockInputOverrides": false,
-        "x": 770,
-        "y": 160,
-        "wires": [
-            [
-                "fd562c7b.ee553"
-            ],
-            [
-                "5f2359f3.20b9b8"
-            ]
-        ]
-    },
-    {
-        "id": "fd562c7b.ee553",
-        "type": "subflow:d172023.57b02",
-        "z": "72c4b6a2.30e0a8",
-        "name": "",
-        "x": 970,
-        "y": 140,
-        "wires": []
-    },
-    {
-        "id": "5f2359f3.20b9b8",
-        "type": "api-current-state",
-        "z": "72c4b6a2.30e0a8",
-        "name": "check if bedside lamp is on",
-        "server": "391f89a3.583ed6",
-        "version": 1,
-        "outputs": 2,
-        "halt_if": "on",
-        "halt_if_type": "str",
-        "halt_if_compare": "is",
-        "override_topic": false,
-        "entity_id": "light.bedside_lamp",
-        "state_type": "str",
-        "state_location": "payload",
-        "override_payload": "msg",
-        "entity_location": "data",
-        "override_data": "msg",
-        "blockInputOverrides": false,
-        "x": 1060,
-        "y": 180,
-        "wires": [
-            [
-                "18b2a14e.9d68ef"
-            ],
-            [
-                "26855d8b.a48c52"
-            ]
-        ]
-    },
-    {
-        "id": "18b2a14e.9d68ef",
-        "type": "subflow:627ae423.cdc09c",
-        "z": "72c4b6a2.30e0a8",
-        "name": "",
-        "x": 1320,
-        "y": 160,
-        "wires": []
-    },
-    {
-        "id": "26855d8b.a48c52",
-        "type": "subflow:d172023.57b02",
-        "z": "72c4b6a2.30e0a8",
-        "name": "",
-        "x": 1310,
-        "y": 200,
-        "wires": []
-    },
-    {
         "id": "2030783c.ef0758",
         "type": "switch",
         "z": "72c4b6a2.30e0a8",
@@ -2646,7 +2559,7 @@
         "y": 160,
         "wires": [
             [
-                "e6a8c804.a31338"
+                "10249fda.83d1c"
             ],
             [
                 "643370c3.5295e"
@@ -2657,6 +2570,8 @@
         "id": "137eac46.d56f24",
         "type": "subflow:72c4b6a2.30e0a8",
         "z": "ba8902ff.b6359",
+        "name": "",
+        "env": [],
         "x": 220,
         "y": 360,
         "wires": []
@@ -2667,7 +2582,7 @@
         "z": "72c4b6a2.30e0a8",
         "name": "",
         "x": 760,
-        "y": 240,
+        "y": 200,
         "wires": []
     },
     {
@@ -3090,7 +3005,7 @@
         "version": 1,
         "debugenabled": false,
         "service_domain": "notify",
-        "service": "mobile_app_blerb11p",
+        "service": "mobile_app_blerb12p",
         "entityId": "",
         "data": "{\"message\":\"The window shade was not automatically closed because the window is still open.\",\"title\":\"Window Left Open\",\"data\":{\"push\":{\"category\":\"window\"}}}",
         "dataType": "json",
@@ -3239,7 +3154,7 @@
         "id": "c1e0e47d.cde4a8",
         "type": "time-inject",
         "z": "ba8902ff.b6359",
-        "name": "noon + 2 hours",
+        "name": "noon + 1",
         "nameInt": "⏲ solar noon↷ = timestamp",
         "positionConfig": "c5cbf783.6e13c8",
         "props": [
@@ -3280,7 +3195,7 @@
         "intervalCountMultiplier": 60000,
         "time": "solarNoon",
         "timeType": "pdsTime",
-        "offset": "2",
+        "offset": "1",
         "offsetType": "num",
         "offsetMultiplier": 3600000,
         "timeEnd": "",
@@ -3311,7 +3226,7 @@
         "once": false,
         "onceDelay": 0.1,
         "recalcTime": 2,
-        "x": 180,
+        "x": 160,
         "y": 180,
         "wires": [
             [
@@ -3521,6 +3436,29 @@
             [
                 "2030783c.ef0758"
             ]
+        ]
+    },
+    {
+        "id": "10249fda.83d1c",
+        "type": "api-call-service",
+        "z": "72c4b6a2.30e0a8",
+        "name": "bedtime",
+        "server": "391f89a3.583ed6",
+        "version": 1,
+        "debugenabled": false,
+        "service_domain": "input_boolean",
+        "service": "turn_on",
+        "entityId": "input_boolean.bedroom_bedtime_trigger",
+        "data": "",
+        "dataType": "json",
+        "mergecontext": "",
+        "output_location": "",
+        "output_location_type": "none",
+        "mustacheAltTags": false,
+        "x": 740,
+        "y": 120,
+        "wires": [
+            []
         ]
     }
 ]
