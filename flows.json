@@ -1136,42 +1136,13 @@
         "halt_if_compare": "is",
         "outputs": 2,
         "output_only_on_state_change": true,
-        "x": 260,
-        "y": 480,
+        "x": 280,
+        "y": 680,
         "wires": [
             [
-                "124e50ef.46cf8f",
-                "e1054d9.b6c45b",
-                "ac52ff7e.67b32"
+                "5c9cfd78.ca2584"
             ],
             []
-        ]
-    },
-    {
-        "id": "124e50ef.46cf8f",
-        "type": "api-current-state",
-        "z": "5d61e676.b8f7c8",
-        "name": "sun",
-        "server": "391f89a3.583ed6",
-        "version": 1,
-        "outputs": 1,
-        "halt_if": "",
-        "halt_if_type": "str",
-        "halt_if_compare": "is",
-        "override_topic": true,
-        "entity_id": "sun.sun",
-        "state_type": "str",
-        "state_location": "payload",
-        "override_payload": "msg",
-        "entity_location": "",
-        "override_data": "none",
-        "blockInputOverrides": false,
-        "x": 450,
-        "y": 480,
-        "wires": [
-            [
-                "fedc85b9.ba0938"
-            ]
         ]
     },
     {
@@ -1191,141 +1162,10 @@
         "output_location": "",
         "output_location_type": "none",
         "mustacheAltTags": false,
-        "x": 1520,
-        "y": 480,
+        "x": 1320,
+        "y": 620,
         "wires": [
             []
-        ]
-    },
-    {
-        "id": "e1054d9.b6c45b",
-        "type": "api-current-state",
-        "z": "5d61e676.b8f7c8",
-        "name": "bedroom",
-        "server": "391f89a3.583ed6",
-        "version": 1,
-        "outputs": 1,
-        "halt_if": "",
-        "halt_if_type": "str",
-        "halt_if_compare": "is",
-        "override_topic": true,
-        "entity_id": "sensor.aeon_labs_zw100_multisensor_6_luminance",
-        "state_type": "num",
-        "state_location": "payload",
-        "override_payload": "msg",
-        "entity_location": "",
-        "override_data": "none",
-        "blockInputOverrides": false,
-        "x": 460,
-        "y": 540,
-        "wires": [
-            [
-                "8f436e9a.f7d8"
-            ]
-        ]
-    },
-    {
-        "id": "ac52ff7e.67b32",
-        "type": "api-current-state",
-        "z": "5d61e676.b8f7c8",
-        "name": "bedroom light is on",
-        "server": "391f89a3.583ed6",
-        "version": 1,
-        "outputs": 1,
-        "halt_if": "",
-        "halt_if_type": "str",
-        "halt_if_compare": "is",
-        "override_topic": true,
-        "entity_id": "light.bedroom_light",
-        "state_type": "habool",
-        "state_location": "payload",
-        "override_payload": "msg",
-        "entity_location": "",
-        "override_data": "none",
-        "blockInputOverrides": false,
-        "x": 490,
-        "y": 600,
-        "wires": [
-            [
-                "98efc42.99d7838"
-            ]
-        ]
-    },
-    {
-        "id": "98efc42.99d7838",
-        "type": "BooleanLogicUltimate",
-        "z": "5d61e676.b8f7c8",
-        "name": "OR",
-        "filtertrue": "onlytrue",
-        "persist": false,
-        "sInitializeWith": "WaitForPayload",
-        "triggertopic": "trigger",
-        "outputtriggeredby": "all",
-        "inputCount": "3",
-        "topic": "result",
-        "x": 810,
-        "y": 540,
-        "wires": [
-            [],
-            [
-                "c2ced6fc.1f6f28",
-                "b082f467.6d74b8"
-            ],
-            []
-        ]
-    },
-    {
-        "id": "fedc85b9.ba0938",
-        "type": "change",
-        "z": "5d61e676.b8f7c8",
-        "name": "is set",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "payload = \"below_horizon\"",
-                "tot": "jsonata"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 570,
-        "y": 480,
-        "wires": [
-            [
-                "98efc42.99d7838"
-            ]
-        ]
-    },
-    {
-        "id": "8f436e9a.f7d8",
-        "type": "change",
-        "z": "5d61e676.b8f7c8",
-        "name": "is dark",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "payload = 0",
-                "tot": "jsonata"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 590,
-        "y": 540,
-        "wires": [
-            [
-                "98efc42.99d7838"
-            ]
         ]
     },
     {
@@ -1632,8 +1472,8 @@
         "noerr": 0,
         "initialize": "",
         "finalize": "",
-        "x": 1320,
-        "y": 540,
+        "x": 1100,
+        "y": 680,
         "wires": [
             [
                 "f5323bbd.6bafa8"
@@ -2601,8 +2441,8 @@
         "output_type": "array",
         "output_location_type": "msg",
         "output_location": "payload",
-        "x": 1120,
-        "y": 540,
+        "x": 920,
+        "y": 680,
         "wires": [
             [
                 "bd529406.6df2c8"
@@ -2940,7 +2780,7 @@
         "output_location_type": "none",
         "mustacheAltTags": false,
         "x": 1090,
-        "y": 740,
+        "y": 760,
         "wires": [
             []
         ]
@@ -2963,7 +2803,7 @@
         "output_location_type": "none",
         "mustacheAltTags": false,
         "x": 1080,
-        "y": 820,
+        "y": 800,
         "wires": [
             []
         ]
@@ -2987,13 +2827,15 @@
         "entity_location": "data",
         "override_data": "msg",
         "blockInputOverrides": false,
-        "x": 1100,
-        "y": 480,
+        "x": 680,
+        "y": 660,
         "wires": [
             [
                 "f5323bbd.6bafa8"
             ],
-            []
+            [
+                "c2ced6fc.1f6f28"
+            ]
         ]
     },
     {
@@ -3155,7 +2997,7 @@
         "type": "time-inject",
         "z": "ba8902ff.b6359",
         "name": "noon + 1",
-        "nameInt": "⏲ solar noon↷ = timestamp",
+        "nameInt": "⏲ solar noon = timestamp",
         "positionConfig": "c5cbf783.6e13c8",
         "props": [
             {
@@ -3195,7 +3037,7 @@
         "intervalCountMultiplier": 60000,
         "time": "solarNoon",
         "timeType": "pdsTime",
-        "offset": "1",
+        "offset": "0",
         "offsetType": "num",
         "offsetMultiplier": 3600000,
         "timeEnd": "",
@@ -3458,6 +3300,59 @@
         "x": 740,
         "y": 120,
         "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5c9cfd78.ca2584",
+        "type": "within-time-switch",
+        "z": "5d61e676.b8f7c8",
+        "name": "dark hours",
+        "nameInt": "",
+        "positionConfig": "c5cbf783.6e13c8",
+        "startTime": "goldenHourDuskStart",
+        "startTimeType": "pdsTime",
+        "startOffset": "-2",
+        "startOffsetType": "num",
+        "startOffsetMultiplier": "3600000",
+        "endTime": "sunrise",
+        "endTimeType": "pdsTime",
+        "endOffset": 0,
+        "endOffsetType": "none",
+        "endOffsetMultiplier": "3600000",
+        "timeDays": "*",
+        "timeOnlyOddDays": false,
+        "timeOnlyEvenDays": false,
+        "timeMonths": "*",
+        "timedatestart": "",
+        "timedateend": "",
+        "propertyStart": "",
+        "propertyStartType": "none",
+        "propertyStartCompare": "true",
+        "propertyStartThreshold": "",
+        "propertyStartThresholdType": "num",
+        "startTimeAlt": "",
+        "startTimeAltType": "entered",
+        "startOffsetAlt": 0,
+        "startOffsetAltType": "none",
+        "startOffsetAltMultiplier": 60000,
+        "propertyEnd": "",
+        "propertyEndType": "none",
+        "propertyEndCompare": "true",
+        "propertyEndThreshold": "",
+        "propertyEndThresholdType": "num",
+        "endTimeAlt": "",
+        "endTimeAltType": "entered",
+        "endOffsetAlt": 0,
+        "endOffsetAltType": "none",
+        "endOffsetAltMultiplier": 60000,
+        "tsCompare": "0",
+        "x": 470,
+        "y": 680,
+        "wires": [
+            [
+                "b082f467.6d74b8"
+            ],
             []
         ]
     }
