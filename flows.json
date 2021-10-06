@@ -1761,9 +1761,7 @@
             [
                 "c4eda02d.f8717"
             ],
-            [
-                "5d5407e7.978418"
-            ]
+            []
         ]
     },
     {
@@ -1897,9 +1895,7 @@
         "x": 310,
         "y": 820,
         "wires": [
-            [
-                "343e9811.212ac8"
-            ]
+            []
         ]
     },
     {
@@ -2032,9 +2028,7 @@
         "x": 310,
         "y": 880,
         "wires": [
-            [
-                "55d17c62.72dfa4"
-            ]
+            []
         ]
     },
     {
@@ -2724,7 +2718,7 @@
         "halt_if_compare": "is",
         "outputs": 2,
         "output_only_on_state_change": true,
-        "x": 280,
+        "x": 440,
         "y": 780,
         "wires": [
             [
@@ -2932,35 +2926,7 @@
         "entity_location": "data",
         "override_data": "msg",
         "blockInputOverrides": false,
-        "x": 490,
-        "y": 780,
-        "wires": [
-            [
-                "9ff4b4de.b161f8"
-            ],
-            []
-        ]
-    },
-    {
-        "id": "9ff4b4de.b161f8",
-        "type": "api-current-state",
-        "z": "5d61e676.b8f7c8",
-        "name": "jason not home",
-        "server": "391f89a3.583ed6",
-        "version": 1,
-        "outputs": 2,
-        "halt_if": "not_home",
-        "halt_if_type": "str",
-        "halt_if_compare": "is",
-        "override_topic": false,
-        "entity_id": "person.jason",
-        "state_type": "str",
-        "state_location": "payload",
-        "override_payload": "msg",
-        "entity_location": "data",
-        "override_data": "msg",
-        "blockInputOverrides": false,
-        "x": 680,
+        "x": 650,
         "y": 780,
         "wires": [
             [
