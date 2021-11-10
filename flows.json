@@ -219,187 +219,6 @@
         "stateDateFormat": "12"
     },
     {
-        "id": "4a57205.9b02ee",
-        "type": "server-state-changed",
-        "z": "26e3222a.ef8a1e",
-        "name": "bedroom dummy trigger turned on",
-        "server": "391f89a3.583ed6",
-        "version": 3,
-        "exposeToHomeAssistant": false,
-        "haConfig": [
-            {
-                "property": "name",
-                "value": ""
-            },
-            {
-                "property": "icon",
-                "value": ""
-            }
-        ],
-        "entityidfilter": "input_boolean\\.bedroom_\\w+_trigger",
-        "entityidfiltertype": "regex",
-        "outputinitially": false,
-        "state_type": "str",
-        "haltifstate": "on",
-        "halt_if_type": "str",
-        "halt_if_compare": "is",
-        "outputs": 2,
-        "output_only_on_state_change": true,
-        "for": "0",
-        "forType": "num",
-        "forUnits": "minutes",
-        "outputProperties": [
-            {
-                "property": "payload",
-                "propertyType": "msg",
-                "value": "",
-                "valueType": "entityState"
-            },
-            {
-                "property": "data",
-                "propertyType": "msg",
-                "value": "",
-                "valueType": "eventData"
-            },
-            {
-                "property": "topic",
-                "propertyType": "msg",
-                "value": "",
-                "valueType": "triggerId"
-            }
-        ],
-        "x": 204,
-        "y": 80,
-        "wires": [
-            [
-                "79a86965.2affd8",
-                "b67591b3.a5f6e"
-            ],
-            []
-        ]
-    },
-    {
-        "id": "79a86965.2affd8",
-        "type": "delay",
-        "z": "26e3222a.ef8a1e",
-        "name": "",
-        "pauseType": "delay",
-        "timeout": "2",
-        "timeoutUnits": "seconds",
-        "rate": "1",
-        "nbRateUnits": "1",
-        "rateUnits": "second",
-        "randomFirst": "1",
-        "randomLast": "5",
-        "randomUnits": "seconds",
-        "drop": false,
-        "x": 460,
-        "y": 80,
-        "wires": [
-            [
-                "18655fa8.eeacc"
-            ]
-        ]
-    },
-    {
-        "id": "c6ada3c9.2809f",
-        "type": "api-call-service",
-        "z": "26e3222a.ef8a1e",
-        "name": "turn off other triggers",
-        "server": "391f89a3.583ed6",
-        "version": 3,
-        "debugenabled": false,
-        "service_domain": "input_boolean",
-        "service": "turn_off",
-        "entityId": "",
-        "data": "{\"entity_id\":\"{{entities}}\"}",
-        "dataType": "json",
-        "mergecontext": "",
-        "mustacheAltTags": false,
-        "outputProperties": [],
-        "queue": "none",
-        "x": 960,
-        "y": 160,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "18655fa8.eeacc",
-        "type": "api-call-service",
-        "z": "26e3222a.ef8a1e",
-        "name": "turn off just-triggered",
-        "server": "391f89a3.583ed6",
-        "version": 3,
-        "debugenabled": false,
-        "service_domain": "input_boolean",
-        "service": "turn_off",
-        "entityId": "",
-        "data": "{\"entity_id\":\"{{topic}}\"}",
-        "dataType": "json",
-        "mergecontext": "",
-        "mustacheAltTags": false,
-        "outputProperties": [],
-        "queue": "none",
-        "x": 660,
-        "y": 80,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "b67591b3.a5f6e",
-        "type": "ha-get-entities",
-        "z": "26e3222a.ef8a1e",
-        "name": "get all dummy triggers",
-        "server": "391f89a3.583ed6",
-        "version": 0,
-        "rules": [
-            {
-                "property": "entity_id",
-                "logic": "is",
-                "value": "input_boolean\\.bedroom_\\w+_trigger",
-                "valueType": "re"
-            },
-            {
-                "property": "entity_id",
-                "logic": "is_not",
-                "value": "topic",
-                "valueType": "msg"
-            }
-        ],
-        "output_type": "array",
-        "output_empty_results": true,
-        "output_location_type": "msg",
-        "output_location": "payload",
-        "output_results_count": 1,
-        "x": 500,
-        "y": 160,
-        "wires": [
-            [
-                "fdab345c.e57938"
-            ]
-        ]
-    },
-    {
-        "id": "fdab345c.e57938",
-        "type": "function",
-        "z": "26e3222a.ef8a1e",
-        "name": "filter out just-triggered",
-        "func": "entities = [];\nmsg.payload.forEach(e => {\n    entities.push(e.entity_id);\n})\nmsg.entities = entities.toString();\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "x": 720,
-        "y": 160,
-        "wires": [
-            [
-                "c6ada3c9.2809f"
-            ]
-        ]
-    },
-    {
         "id": "4f8255ec.d9e7bc",
         "type": "change",
         "z": "52a854ab.b0524c",
@@ -534,6 +353,894 @@
             [
                 "59247e62.c82be"
             ]
+        ]
+    },
+    {
+        "id": "59247e62.c82be",
+        "type": "api-get-history",
+        "z": "52a854ab.b0524c",
+        "name": "",
+        "server": "391f89a3.583ed6",
+        "version": 0,
+        "startdate": "",
+        "enddate": "",
+        "entityid": "light.bedroom_overhead_lights",
+        "entityidtype": "is",
+        "useRelativeTime": true,
+        "relativeTime": "10 seconds",
+        "flatten": true,
+        "output_type": "array",
+        "output_location_type": "msg",
+        "output_location": "history",
+        "x": 490,
+        "y": 140,
+        "wires": [
+            [
+                "25322f8e.fa877"
+            ]
+        ]
+    },
+    {
+        "id": "25322f8e.fa877",
+        "type": "switch",
+        "z": "52a854ab.b0524c",
+        "name": "",
+        "property": "history.state",
+        "propertyType": "jsonata",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "on",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 640,
+        "y": 140,
+        "wires": [
+            [],
+            [
+                "4abb3438.4febbc"
+            ]
+        ]
+    },
+    {
+        "id": "14729e53.457182",
+        "type": "api-call-service",
+        "z": "940272e0.e7353",
+        "name": "enable motion block",
+        "server": "391f89a3.583ed6",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "input_boolean",
+        "service": "turn_on",
+        "entityId": "input_boolean.bedtime_block_motion",
+        "data": "",
+        "dataType": "json",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 840,
+        "y": 140,
+        "wires": [
+            [
+                "3fb15b3.ab24ba4"
+            ]
+        ]
+    },
+    {
+        "id": "3fb15b3.ab24ba4",
+        "type": "delay",
+        "z": "940272e0.e7353",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "outputs": 1,
+        "x": 1020,
+        "y": 140,
+        "wires": [
+            [
+                "cbaffdc4.8014e"
+            ]
+        ]
+    },
+    {
+        "id": "cbaffdc4.8014e",
+        "type": "api-call-service",
+        "z": "940272e0.e7353",
+        "name": "disable motion block",
+        "server": "391f89a3.583ed6",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "input_boolean",
+        "service": "turn_off",
+        "entityId": "input_boolean.bedtime_block_motion",
+        "data": "",
+        "dataType": "json",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 1200,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4a6ef134.bc3ea",
+        "type": "subflow:627ae423.cdc09c",
+        "z": "940272e0.e7353",
+        "name": "",
+        "env": [],
+        "x": 820,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "178ae963.37e2f7",
+        "type": "subflow:d172023.57b02",
+        "z": "940272e0.e7353",
+        "name": "",
+        "x": 810,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "aea0917b.51941",
+        "type": "subflow:e57f4074.d8fa3",
+        "z": "940272e0.e7353",
+        "name": "",
+        "x": 760,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "ca564400.ef6808",
+        "type": "server-events",
+        "z": "940272e0.e7353",
+        "name": "zwave scene activated",
+        "server": "391f89a3.583ed6",
+        "version": 1,
+        "event_type": "zwave.scene_activated",
+        "exposeToHomeAssistant": false,
+        "haConfig": [
+            {
+                "property": "name",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            }
+        ],
+        "waitForRunning": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "eventData"
+            },
+            {
+                "property": "topic",
+                "propertyType": "msg",
+                "value": "$outputData(\"eventData\").event_type",
+                "valueType": "jsonata"
+            },
+            {
+                "property": "event_type",
+                "propertyType": "msg",
+                "value": "$outputData(\"eventData\").event_type",
+                "valueType": "jsonata"
+            }
+        ],
+        "x": 100,
+        "y": 140,
+        "wires": [
+            [
+                "b4c177ae.72f8f8"
+            ]
+        ]
+    },
+    {
+        "id": "b4c177ae.72f8f8",
+        "type": "switch",
+        "z": "940272e0.e7353",
+        "name": "is dimmer switch",
+        "property": "payload.entity_id",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "zwave.dimmer_switch",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 310,
+        "y": 140,
+        "wires": [
+            [
+                "b32c3cd6.7cd14"
+            ]
+        ]
+    },
+    {
+        "id": "b32c3cd6.7cd14",
+        "type": "switch",
+        "z": "940272e0.e7353",
+        "name": "",
+        "property": "payload.event.scene_id",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "2",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 470,
+        "y": 140,
+        "wires": [
+            [
+                "aea0917b.51941"
+            ],
+            [
+                "469baa1e.2581d4"
+            ]
+        ]
+    },
+    {
+        "id": "469baa1e.2581d4",
+        "type": "switch",
+        "z": "940272e0.e7353",
+        "name": "",
+        "property": "payload.event.scene_data",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "2",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 590,
+        "y": 180,
+        "wires": [
+            [
+                "14729e53.457182",
+                "4a6ef134.bc3ea"
+            ],
+            [
+                "178ae963.37e2f7"
+            ]
+        ],
+        "outputLabels": [
+            "short press down",
+            "long press down"
+        ]
+    },
+    {
+        "id": "7335595c.a98148",
+        "type": "trigger-state",
+        "z": "eddddd53.6ebb3",
+        "name": "tv changes inputs",
+        "server": "391f89a3.583ed6",
+        "version": 0,
+        "exposeToHomeAssistant": false,
+        "haConfig": [
+            {
+                "property": "name",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            }
+        ],
+        "entityid": "media_player.lg_tv",
+        "entityidfiltertype": "exact",
+        "debugenabled": false,
+        "constraints": [],
+        "outputs": 2,
+        "customoutputs": [],
+        "outputinitially": false,
+        "state_type": "str",
+        "x": 190,
+        "y": 100,
+        "wires": [
+            [
+                "402bbaf2.306bf4",
+                "74fab16c.3af9e"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "402bbaf2.306bf4",
+        "type": "switch",
+        "z": "eddddd53.6ebb3",
+        "name": "TV was on",
+        "property": "data.event.old_state.state",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "on",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 370,
+        "y": 80,
+        "wires": [
+            [
+                "81069164.afd01"
+            ]
+        ]
+    },
+    {
+        "id": "81069164.afd01",
+        "type": "switch",
+        "z": "eddddd53.6ebb3",
+        "name": "TV is now off",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "off",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 530,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "74fab16c.3af9e",
+        "type": "switch",
+        "z": "eddddd53.6ebb3",
+        "name": "TV was off",
+        "property": "data.event.old_state.state",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "off",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 370,
+        "y": 140,
+        "wires": [
+            [
+                "8b8fa6fd.5c6878"
+            ]
+        ]
+    },
+    {
+        "id": "8b8fa6fd.5c6878",
+        "type": "switch",
+        "z": "eddddd53.6ebb3",
+        "name": "TV is now on",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "on",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 530,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4a57205.9b02ee",
+        "type": "server-state-changed",
+        "z": "26e3222a.ef8a1e",
+        "name": "bedroom dummy trigger turned on",
+        "server": "391f89a3.583ed6",
+        "version": 3,
+        "exposeToHomeAssistant": false,
+        "haConfig": [
+            {
+                "property": "name",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            }
+        ],
+        "entityidfilter": "input_boolean\\.bedroom_\\w+_trigger",
+        "entityidfiltertype": "regex",
+        "outputinitially": false,
+        "state_type": "str",
+        "haltifstate": "on",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "outputs": 2,
+        "output_only_on_state_change": true,
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "eventData"
+            },
+            {
+                "property": "topic",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "triggerId"
+            }
+        ],
+        "x": 204,
+        "y": 80,
+        "wires": [
+            [
+                "79a86965.2affd8",
+                "b67591b3.a5f6e"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "79a86965.2affd8",
+        "type": "delay",
+        "z": "26e3222a.ef8a1e",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "2",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "outputs": 1,
+        "x": 460,
+        "y": 80,
+        "wires": [
+            [
+                "18655fa8.eeacc"
+            ]
+        ]
+    },
+    {
+        "id": "c6ada3c9.2809f",
+        "type": "api-call-service",
+        "z": "26e3222a.ef8a1e",
+        "name": "turn off other triggers",
+        "server": "391f89a3.583ed6",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "input_boolean",
+        "service": "turn_off",
+        "entityId": "",
+        "data": "{\"entity_id\":\"{{entities}}\"}",
+        "dataType": "json",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 960,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "18655fa8.eeacc",
+        "type": "api-call-service",
+        "z": "26e3222a.ef8a1e",
+        "name": "turn off just-triggered",
+        "server": "391f89a3.583ed6",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "input_boolean",
+        "service": "turn_off",
+        "entityId": "",
+        "data": "{\"entity_id\":\"{{topic}}\"}",
+        "dataType": "json",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 660,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b67591b3.a5f6e",
+        "type": "ha-get-entities",
+        "z": "26e3222a.ef8a1e",
+        "name": "get all dummy triggers",
+        "server": "391f89a3.583ed6",
+        "version": 0,
+        "rules": [
+            {
+                "property": "entity_id",
+                "logic": "is",
+                "value": "input_boolean\\.bedroom_\\w+_trigger",
+                "valueType": "re"
+            },
+            {
+                "property": "entity_id",
+                "logic": "is_not",
+                "value": "topic",
+                "valueType": "msg"
+            }
+        ],
+        "output_type": "array",
+        "output_empty_results": true,
+        "output_location_type": "msg",
+        "output_location": "payload",
+        "output_results_count": 1,
+        "x": 500,
+        "y": 160,
+        "wires": [
+            [
+                "fdab345c.e57938"
+            ]
+        ]
+    },
+    {
+        "id": "fdab345c.e57938",
+        "type": "function",
+        "z": "26e3222a.ef8a1e",
+        "name": "filter out just-triggered",
+        "func": "entities = [];\nmsg.payload.forEach(e => {\n    entities.push(e.entity_id);\n})\nmsg.entities = entities.toString();\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 720,
+        "y": 160,
+        "wires": [
+            [
+                "c6ada3c9.2809f"
+            ]
+        ]
+    },
+    {
+        "id": "80bb5cec.59a9",
+        "type": "api-call-service",
+        "z": "627ae423.cdc09c",
+        "name": "good night",
+        "server": "391f89a3.583ed6",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "input_boolean",
+        "service": "turn_on",
+        "entityId": "input_boolean.bedroom_goodnight_trigger",
+        "data": "",
+        "dataType": "json",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 410,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9f22c9b1.175368",
+        "type": "api-call-service",
+        "z": "d172023.57b02",
+        "name": "bedtime",
+        "server": "391f89a3.583ed6",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "input_boolean",
+        "service": "turn_on",
+        "entityId": "input_boolean.bedroom_bedtime_trigger",
+        "data": "",
+        "dataType": "json",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 460,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "fa2b0ad0.4329e8",
+        "type": "api-call-service",
+        "z": "d172023.57b02",
+        "name": "main light off",
+        "server": "391f89a3.583ed6",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "light",
+        "service": "turn_off",
+        "entityId": "light.bedroom_light",
+        "data": "",
+        "dataType": "json",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 470,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "519fa747.834e78",
+        "type": "api-call-service",
+        "z": "e57f4074.d8fa3",
+        "name": "arrive home",
+        "server": "391f89a3.583ed6",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "input_boolean",
+        "service": "turn_on",
+        "entityId": "input_boolean.bedroom_arrivehome_trigger",
+        "data": "",
+        "dataType": "json",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 510,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "75645783.947148",
+        "type": "api-call-service",
+        "z": "e57f4074.d8fa3",
+        "name": "main light on",
+        "server": "391f89a3.583ed6",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "light",
+        "service": "turn_on",
+        "entityId": "light.bedroom_light",
+        "data": "",
+        "dataType": "json",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 510,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "43ba5ccf.3fc274",
+        "type": "api-call-service",
+        "z": "e57f4074.d8fa3",
+        "name": "bedside light on",
+        "server": "391f89a3.583ed6",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "light",
+        "service": "turn_on",
+        "entityId": "light.bedside_lamp",
+        "data": "{\"brightness_step_pct\":1}",
+        "dataType": "json",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 520,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2030783c.ef0758",
+        "type": "switch",
+        "z": "72c4b6a2.30e0a8",
+        "name": "check event type",
+        "property": "payload.event.command",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "button_single",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "button_double",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 550,
+        "y": 160,
+        "wires": [
+            [
+                "10249fda.83d1c"
+            ],
+            [
+                "643370c3.5295e"
+            ]
+        ]
+    },
+    {
+        "id": "643370c3.5295e",
+        "type": "subflow:e57f4074.d8fa3",
+        "z": "72c4b6a2.30e0a8",
+        "name": "",
+        "x": 760,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "65f223f2.356f7c",
+        "type": "server-events",
+        "z": "72c4b6a2.30e0a8",
+        "name": "zigbee event",
+        "server": "391f89a3.583ed6",
+        "version": 1,
+        "event_type": "zha_event",
+        "exposeToHomeAssistant": false,
+        "haConfig": [
+            {
+                "property": "name",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            }
+        ],
+        "waitForRunning": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "eventData"
+            },
+            {
+                "property": "topic",
+                "propertyType": "msg",
+                "value": "$outputData(\"eventData\").event_type",
+                "valueType": "jsonata"
+            },
+            {
+                "property": "event_type",
+                "propertyType": "msg",
+                "value": "$outputData(\"eventData\").event_type",
+                "valueType": "jsonata"
+            }
+        ],
+        "x": 110,
+        "y": 160,
+        "wires": [
+            [
+                "bd62d1cc.d8f03"
+            ]
+        ]
+    },
+    {
+        "id": "bd62d1cc.d8f03",
+        "type": "switch",
+        "z": "72c4b6a2.30e0a8",
+        "name": "is smartthings button",
+        "property": "payload.event.device_ieee",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "28:6d:97:00:01:0b:fa:7c",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 320,
+        "y": 160,
+        "wires": [
+            [
+                "2030783c.ef0758"
+            ]
+        ]
+    },
+    {
+        "id": "10249fda.83d1c",
+        "type": "api-call-service",
+        "z": "72c4b6a2.30e0a8",
+        "name": "bedtime",
+        "server": "391f89a3.583ed6",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "input_boolean",
+        "service": "turn_on",
+        "entityId": "input_boolean.bedroom_bedtime_trigger",
+        "data": "",
+        "dataType": "json",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 740,
+        "y": 120,
+        "wires": [
+            []
         ]
     },
     {
@@ -749,300 +1456,6 @@
         ]
     },
     {
-        "id": "a979de5c.73fec",
-        "type": "trigger-state",
-        "z": "79fa72c5.6e4ccc",
-        "name": "tv changes inputs",
-        "server": "391f89a3.583ed6",
-        "version": 0,
-        "exposeToHomeAssistant": false,
-        "haConfig": [
-            {
-                "property": "name",
-                "value": ""
-            },
-            {
-                "property": "icon",
-                "value": ""
-            }
-        ],
-        "entityid": "media_player.lg_tv",
-        "entityidfiltertype": "exact",
-        "debugenabled": false,
-        "constraints": [],
-        "outputs": 2,
-        "customoutputs": [],
-        "outputinitially": false,
-        "state_type": "str",
-        "x": 310,
-        "y": 340,
-        "wires": [
-            [
-                "2b65810f22342e72"
-            ],
-            []
-        ]
-    },
-    {
-        "id": "5f3a0448.3348ec",
-        "type": "api-current-state",
-        "z": "79fa72c5.6e4ccc",
-        "name": "main lights on",
-        "server": "391f89a3.583ed6",
-        "version": 2,
-        "outputs": 2,
-        "halt_if": "on",
-        "halt_if_type": "str",
-        "halt_if_compare": "is",
-        "entity_id": "light.brilliant",
-        "state_type": "str",
-        "blockInputOverrides": false,
-        "outputProperties": [
-            {
-                "property": "payload",
-                "propertyType": "msg",
-                "value": "",
-                "valueType": "entityState"
-            },
-            {
-                "property": "data",
-                "propertyType": "msg",
-                "value": "",
-                "valueType": "entity"
-            }
-        ],
-        "x": 320,
-        "y": 400,
-        "wires": [
-            [
-                "e77dcb.b1b1c238"
-            ],
-            []
-        ]
-    },
-    {
-        "id": "e77dcb.b1b1c238",
-        "type": "api-call-service",
-        "z": "79fa72c5.6e4ccc",
-        "name": "set movie watching scene",
-        "server": "391f89a3.583ed6",
-        "version": 3,
-        "debugenabled": false,
-        "service_domain": "scene",
-        "service": "turn_on",
-        "entityId": "scene.movie_watching",
-        "data": "{\"transition\":10}",
-        "dataType": "json",
-        "mergecontext": "",
-        "mustacheAltTags": false,
-        "outputProperties": [],
-        "queue": "none",
-        "x": 550,
-        "y": 400,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "2f9cf67d.87054a",
-        "type": "api-call-service",
-        "z": "79fa72c5.6e4ccc",
-        "name": "turn on overhead lights",
-        "server": "391f89a3.583ed6",
-        "version": 3,
-        "debugenabled": true,
-        "service_domain": "light",
-        "service": "turn_on",
-        "entityId": "light.brilliant",
-        "data": "{\"brightness_pct\":\"5\"}",
-        "dataType": "json",
-        "mergecontext": "",
-        "mustacheAltTags": false,
-        "outputProperties": [],
-        "queue": "none",
-        "x": 1210,
-        "y": 460,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "b7ede1fc.b6954",
-        "type": "api-call-service",
-        "z": "79fa72c5.6e4ccc",
-        "name": "turn on table lamp",
-        "server": "391f89a3.583ed6",
-        "version": 3,
-        "debugenabled": false,
-        "service_domain": "light",
-        "service": "turn_on",
-        "entityId": "light.table_lamp",
-        "data": "{\"transition\":\"3\", \"brightness_pct\": \"100\"}",
-        "dataType": "json",
-        "mergecontext": "",
-        "mustacheAltTags": false,
-        "outputProperties": [],
-        "queue": "none",
-        "x": 1330,
-        "y": 580,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "780f660f.1af758",
-        "type": "server-state-changed",
-        "z": "5d61e676.b8f7c8",
-        "name": "front door open",
-        "server": "391f89a3.583ed6",
-        "version": 3,
-        "exposeToHomeAssistant": false,
-        "haConfig": [
-            {
-                "property": "name",
-                "value": ""
-            },
-            {
-                "property": "icon",
-                "value": ""
-            }
-        ],
-        "entityidfilter": "binary_sensor.front_door",
-        "entityidfiltertype": "exact",
-        "outputinitially": false,
-        "state_type": "str",
-        "haltifstate": "on",
-        "halt_if_type": "str",
-        "halt_if_compare": "is",
-        "outputs": 2,
-        "output_only_on_state_change": true,
-        "for": "0",
-        "forType": "num",
-        "forUnits": "minutes",
-        "outputProperties": [
-            {
-                "property": "payload",
-                "propertyType": "msg",
-                "value": "",
-                "valueType": "entityState"
-            },
-            {
-                "property": "data",
-                "propertyType": "msg",
-                "value": "",
-                "valueType": "eventData"
-            },
-            {
-                "property": "topic",
-                "propertyType": "msg",
-                "value": "",
-                "valueType": "triggerId"
-            }
-        ],
-        "x": 160,
-        "y": 640,
-        "wires": [
-            [
-                "5c9cfd78.ca2584"
-            ],
-            []
-        ]
-    },
-    {
-        "id": "f5323bbd.6bafa8",
-        "type": "api-call-service",
-        "z": "5d61e676.b8f7c8",
-        "name": "turn on entry light",
-        "server": "391f89a3.583ed6",
-        "version": 3,
-        "debugenabled": false,
-        "service_domain": "switch",
-        "service": "turn_on",
-        "entityId": "switch.entryway_light",
-        "data": "",
-        "dataType": "json",
-        "mergecontext": "",
-        "mustacheAltTags": false,
-        "outputProperties": [],
-        "queue": "none",
-        "x": 1450,
-        "y": 660,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "14729e53.457182",
-        "type": "api-call-service",
-        "z": "940272e0.e7353",
-        "name": "enable motion block",
-        "server": "391f89a3.583ed6",
-        "version": 3,
-        "debugenabled": false,
-        "service_domain": "input_boolean",
-        "service": "turn_on",
-        "entityId": "input_boolean.bedtime_block_motion",
-        "data": "",
-        "dataType": "json",
-        "mergecontext": "",
-        "mustacheAltTags": false,
-        "outputProperties": [],
-        "queue": "none",
-        "x": 840,
-        "y": 140,
-        "wires": [
-            [
-                "3fb15b3.ab24ba4"
-            ]
-        ]
-    },
-    {
-        "id": "3fb15b3.ab24ba4",
-        "type": "delay",
-        "z": "940272e0.e7353",
-        "name": "",
-        "pauseType": "delay",
-        "timeout": "5",
-        "timeoutUnits": "seconds",
-        "rate": "1",
-        "nbRateUnits": "1",
-        "rateUnits": "second",
-        "randomFirst": "1",
-        "randomLast": "5",
-        "randomUnits": "seconds",
-        "drop": false,
-        "x": 1020,
-        "y": 140,
-        "wires": [
-            [
-                "cbaffdc4.8014e"
-            ]
-        ]
-    },
-    {
-        "id": "cbaffdc4.8014e",
-        "type": "api-call-service",
-        "z": "940272e0.e7353",
-        "name": "disable motion block",
-        "server": "391f89a3.583ed6",
-        "version": 3,
-        "debugenabled": false,
-        "service_domain": "input_boolean",
-        "service": "turn_off",
-        "entityId": "input_boolean.bedtime_block_motion",
-        "data": "",
-        "dataType": "json",
-        "mergecontext": "",
-        "mustacheAltTags": false,
-        "outputProperties": [],
-        "queue": "none",
-        "x": 1200,
-        "y": 140,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "6d6aa3d0.1eb3fc",
         "type": "function",
         "z": "ba8902ff.b6359",
@@ -1061,268 +1474,12 @@
         "l": false
     },
     {
-        "id": "59247e62.c82be",
-        "type": "api-get-history",
-        "z": "52a854ab.b0524c",
-        "name": "",
-        "server": "391f89a3.583ed6",
-        "version": 0,
-        "startdate": "",
-        "enddate": "",
-        "entityid": "light.bedroom_overhead_lights",
-        "entityidtype": "is",
-        "useRelativeTime": true,
-        "relativeTime": "10 seconds",
-        "flatten": true,
-        "output_type": "array",
-        "output_location_type": "msg",
-        "output_location": "history",
-        "x": 490,
-        "y": 140,
-        "wires": [
-            [
-                "25322f8e.fa877"
-            ]
-        ]
-    },
-    {
-        "id": "25322f8e.fa877",
-        "type": "switch",
-        "z": "52a854ab.b0524c",
-        "name": "",
-        "property": "history.state",
-        "propertyType": "jsonata",
-        "rules": [
-            {
-                "t": "cont",
-                "v": "on",
-                "vt": "str"
-            },
-            {
-                "t": "else"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 640,
-        "y": 140,
-        "wires": [
-            [],
-            [
-                "4abb3438.4febbc"
-            ]
-        ]
-    },
-    {
-        "id": "bd529406.6df2c8",
-        "type": "function",
-        "z": "5d61e676.b8f7c8",
-        "name": "not home",
-        "func": "for (var idx in msg.payload) {\n    if (msg.payload[idx].state == \"not_home\") {\n        return msg;\n    }\n}",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "x": 1200,
-        "y": 680,
-        "wires": [
-            [
-                "f5323bbd.6bafa8"
-            ]
-        ]
-    },
-    {
         "id": "f80da0a8.6a63c",
         "type": "subflow:940272e0.e7353",
         "z": "ba8902ff.b6359",
         "x": 210,
         "y": 320,
         "wires": [
-            []
-        ]
-    },
-    {
-        "id": "4e9a16bb.c9eeb8",
-        "type": "api-current-state",
-        "z": "79fa72c5.6e4ccc",
-        "name": "overhead lights are off",
-        "server": "391f89a3.583ed6",
-        "version": 2,
-        "outputs": 2,
-        "halt_if": "off",
-        "halt_if_type": "str",
-        "halt_if_compare": "is",
-        "entity_id": "light.brilliant",
-        "state_type": "str",
-        "blockInputOverrides": false,
-        "outputProperties": [
-            {
-                "property": "payload",
-                "propertyType": "msg",
-                "value": "",
-                "valueType": "entityState"
-            },
-            {
-                "property": "data",
-                "propertyType": "msg",
-                "value": "",
-                "valueType": "entity"
-            }
-        ],
-        "x": 740,
-        "y": 460,
-        "wires": [
-            [
-                "2e516682dfa91418"
-            ],
-            []
-        ]
-    },
-    {
-        "id": "7335595c.a98148",
-        "type": "trigger-state",
-        "z": "eddddd53.6ebb3",
-        "name": "tv changes inputs",
-        "server": "391f89a3.583ed6",
-        "version": 0,
-        "exposeToHomeAssistant": false,
-        "haConfig": [
-            {
-                "property": "name",
-                "value": ""
-            },
-            {
-                "property": "icon",
-                "value": ""
-            }
-        ],
-        "entityid": "media_player.lg_tv",
-        "entityidfiltertype": "exact",
-        "debugenabled": false,
-        "constraints": [],
-        "outputs": 2,
-        "customoutputs": [],
-        "outputinitially": false,
-        "state_type": "str",
-        "x": 190,
-        "y": 100,
-        "wires": [
-            [
-                "402bbaf2.306bf4",
-                "74fab16c.3af9e"
-            ],
-            []
-        ]
-    },
-    {
-        "id": "402bbaf2.306bf4",
-        "type": "switch",
-        "z": "eddddd53.6ebb3",
-        "name": "TV was on",
-        "property": "data.event.old_state.state",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "on",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 1,
-        "x": 370,
-        "y": 80,
-        "wires": [
-            [
-                "81069164.afd01"
-            ]
-        ]
-    },
-    {
-        "id": "81069164.afd01",
-        "type": "switch",
-        "z": "eddddd53.6ebb3",
-        "name": "TV is now off",
-        "property": "payload",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "off",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 1,
-        "x": 530,
-        "y": 80,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "74fab16c.3af9e",
-        "type": "switch",
-        "z": "eddddd53.6ebb3",
-        "name": "TV was off",
-        "property": "data.event.old_state.state",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "off",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 1,
-        "x": 370,
-        "y": 140,
-        "wires": [
-            [
-                "8b8fa6fd.5c6878"
-            ]
-        ]
-    },
-    {
-        "id": "8b8fa6fd.5c6878",
-        "type": "switch",
-        "z": "eddddd53.6ebb3",
-        "name": "TV is now on",
-        "property": "payload",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "on",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 1,
-        "x": 530,
-        "y": 140,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "61a1e761.280e28",
-        "type": "subflow:eddddd53.6ebb3",
-        "z": "79fa72c5.6e4ccc",
-        "name": "",
-        "env": [],
-        "x": 400,
-        "y": 540,
-        "wires": [
-            [
-                "ce532f7c3325e8c0"
-            ],
             []
         ]
     },
@@ -1372,29 +1529,6 @@
         ]
     },
     {
-        "id": "80bb5cec.59a9",
-        "type": "api-call-service",
-        "z": "627ae423.cdc09c",
-        "name": "good night",
-        "server": "391f89a3.583ed6",
-        "version": 3,
-        "debugenabled": false,
-        "service_domain": "input_boolean",
-        "service": "turn_on",
-        "entityId": "input_boolean.bedroom_goodnight_trigger",
-        "data": "",
-        "dataType": "json",
-        "mergecontext": "",
-        "mustacheAltTags": false,
-        "outputProperties": [],
-        "queue": "none",
-        "x": 410,
-        "y": 180,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "564bbcb4.edcae4",
         "type": "subflow:627ae423.cdc09c",
         "z": "ba8902ff.b6359",
@@ -1405,182 +1539,6 @@
         "wires": []
     },
     {
-        "id": "4a6ef134.bc3ea",
-        "type": "subflow:627ae423.cdc09c",
-        "z": "940272e0.e7353",
-        "name": "",
-        "env": [],
-        "x": 820,
-        "y": 100,
-        "wires": []
-    },
-    {
-        "id": "9f22c9b1.175368",
-        "type": "api-call-service",
-        "z": "d172023.57b02",
-        "name": "bedtime",
-        "server": "391f89a3.583ed6",
-        "version": 3,
-        "debugenabled": false,
-        "service_domain": "input_boolean",
-        "service": "turn_on",
-        "entityId": "input_boolean.bedroom_bedtime_trigger",
-        "data": "",
-        "dataType": "json",
-        "mergecontext": "",
-        "mustacheAltTags": false,
-        "outputProperties": [],
-        "queue": "none",
-        "x": 460,
-        "y": 180,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "fa2b0ad0.4329e8",
-        "type": "api-call-service",
-        "z": "d172023.57b02",
-        "name": "main light off",
-        "server": "391f89a3.583ed6",
-        "version": 3,
-        "debugenabled": false,
-        "service_domain": "light",
-        "service": "turn_off",
-        "entityId": "light.bedroom_light",
-        "data": "",
-        "dataType": "json",
-        "mergecontext": "",
-        "mustacheAltTags": false,
-        "outputProperties": [],
-        "queue": "none",
-        "x": 470,
-        "y": 140,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "178ae963.37e2f7",
-        "type": "subflow:d172023.57b02",
-        "z": "940272e0.e7353",
-        "name": "",
-        "x": 810,
-        "y": 200,
-        "wires": []
-    },
-    {
-        "id": "519fa747.834e78",
-        "type": "api-call-service",
-        "z": "e57f4074.d8fa3",
-        "name": "arrive home",
-        "server": "391f89a3.583ed6",
-        "version": 3,
-        "debugenabled": false,
-        "service_domain": "input_boolean",
-        "service": "turn_on",
-        "entityId": "input_boolean.bedroom_arrivehome_trigger",
-        "data": "",
-        "dataType": "json",
-        "mergecontext": "",
-        "mustacheAltTags": false,
-        "outputProperties": [],
-        "queue": "none",
-        "x": 510,
-        "y": 220,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "75645783.947148",
-        "type": "api-call-service",
-        "z": "e57f4074.d8fa3",
-        "name": "main light on",
-        "server": "391f89a3.583ed6",
-        "version": 3,
-        "debugenabled": false,
-        "service_domain": "light",
-        "service": "turn_on",
-        "entityId": "light.bedroom_light",
-        "data": "",
-        "dataType": "json",
-        "mergecontext": "",
-        "mustacheAltTags": false,
-        "outputProperties": [],
-        "queue": "none",
-        "x": 510,
-        "y": 180,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "43ba5ccf.3fc274",
-        "type": "api-call-service",
-        "z": "e57f4074.d8fa3",
-        "name": "bedside light on",
-        "server": "391f89a3.583ed6",
-        "version": 3,
-        "debugenabled": false,
-        "service_domain": "light",
-        "service": "turn_on",
-        "entityId": "light.bedside_lamp",
-        "data": "{\"brightness_step_pct\":1}",
-        "dataType": "json",
-        "mergecontext": "",
-        "mustacheAltTags": false,
-        "outputProperties": [],
-        "queue": "none",
-        "x": 520,
-        "y": 140,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "aea0917b.51941",
-        "type": "subflow:e57f4074.d8fa3",
-        "z": "940272e0.e7353",
-        "name": "",
-        "x": 760,
-        "y": 40,
-        "wires": []
-    },
-    {
-        "id": "2030783c.ef0758",
-        "type": "switch",
-        "z": "72c4b6a2.30e0a8",
-        "name": "check event type",
-        "property": "payload.event.command",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "button_single",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "button_double",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 550,
-        "y": 160,
-        "wires": [
-            [
-                "10249fda.83d1c"
-            ],
-            [
-                "643370c3.5295e"
-            ]
-        ]
-    },
-    {
         "id": "137eac46.d56f24",
         "type": "subflow:72c4b6a2.30e0a8",
         "z": "ba8902ff.b6359",
@@ -1589,335 +1547,6 @@
         "x": 220,
         "y": 360,
         "wires": []
-    },
-    {
-        "id": "643370c3.5295e",
-        "type": "subflow:e57f4074.d8fa3",
-        "z": "72c4b6a2.30e0a8",
-        "name": "",
-        "x": 760,
-        "y": 200,
-        "wires": []
-    },
-    {
-        "id": "c2ced6fc.1f6f28",
-        "type": "api-get-history",
-        "z": "5d61e676.b8f7c8",
-        "name": "presence last 2 mins",
-        "server": "391f89a3.583ed6",
-        "version": 0,
-        "startdate": "",
-        "enddate": "",
-        "entityid": "person.gautam",
-        "entityidtype": "is",
-        "useRelativeTime": true,
-        "relativeTime": "2 minutes",
-        "flatten": true,
-        "output_type": "array",
-        "output_location_type": "msg",
-        "output_location": "payload",
-        "x": 920,
-        "y": 680,
-        "wires": [
-            [
-                "bd529406.6df2c8"
-            ]
-        ]
-    },
-    {
-        "id": "4365276c.14da98",
-        "type": "server-state-changed",
-        "z": "79fa72c5.6e4ccc",
-        "name": "Guest Mode Toggled",
-        "server": "391f89a3.583ed6",
-        "version": 3,
-        "exposeToHomeAssistant": false,
-        "haConfig": [
-            {
-                "property": "name",
-                "value": ""
-            },
-            {
-                "property": "icon",
-                "value": ""
-            }
-        ],
-        "entityidfilter": "input_boolean.guest_mode",
-        "entityidfiltertype": "exact",
-        "outputinitially": false,
-        "state_type": "str",
-        "haltifstate": "on",
-        "halt_if_type": "str",
-        "halt_if_compare": "is",
-        "outputs": 2,
-        "output_only_on_state_change": true,
-        "for": "0",
-        "forType": "num",
-        "forUnits": "minutes",
-        "outputProperties": [
-            {
-                "property": "payload",
-                "propertyType": "msg",
-                "value": "",
-                "valueType": "entityState"
-            },
-            {
-                "property": "data",
-                "propertyType": "msg",
-                "value": "",
-                "valueType": "eventData"
-            },
-            {
-                "property": "topic",
-                "propertyType": "msg",
-                "value": "",
-                "valueType": "triggerId"
-            }
-        ],
-        "x": 400,
-        "y": 720,
-        "wires": [
-            [
-                "dee738a0.22aad8"
-            ],
-            [
-                "f3649d77.a8add"
-            ]
-        ]
-    },
-    {
-        "id": "dee738a0.22aad8",
-        "type": "api-call-service",
-        "z": "79fa72c5.6e4ccc",
-        "name": "turn on blind block",
-        "server": "391f89a3.583ed6",
-        "version": 3,
-        "debugenabled": false,
-        "service_domain": "input_boolean",
-        "service": "turn_on",
-        "entityId": "input_boolean.block_automatic_blinds",
-        "data": "",
-        "dataType": "json",
-        "mergecontext": "",
-        "mustacheAltTags": false,
-        "outputProperties": [],
-        "queue": "none",
-        "x": 610,
-        "y": 700,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "f3649d77.a8add",
-        "type": "api-call-service",
-        "z": "79fa72c5.6e4ccc",
-        "name": "turn off blind block",
-        "server": "391f89a3.583ed6",
-        "version": 3,
-        "debugenabled": false,
-        "service_domain": "input_boolean",
-        "service": "turn_off",
-        "entityId": "input_boolean.block_automatic_blinds",
-        "data": "",
-        "dataType": "json",
-        "mergecontext": "",
-        "mustacheAltTags": false,
-        "outputProperties": [],
-        "queue": "none",
-        "x": 610,
-        "y": 740,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "d8a3a07c.8d65c",
-        "type": "server-state-changed",
-        "z": "5d61e676.b8f7c8",
-        "name": "someone leaves home",
-        "server": "391f89a3.583ed6",
-        "version": 3,
-        "exposeToHomeAssistant": false,
-        "haConfig": [
-            {
-                "property": "name",
-                "value": ""
-            },
-            {
-                "property": "icon",
-                "value": ""
-            }
-        ],
-        "entityidfilter": "person.gautam",
-        "entityidfiltertype": "exact",
-        "outputinitially": false,
-        "state_type": "str",
-        "haltifstate": "not_home",
-        "halt_if_type": "str",
-        "halt_if_compare": "is",
-        "outputs": 2,
-        "output_only_on_state_change": true,
-        "for": "2",
-        "forType": "num",
-        "forUnits": "minutes",
-        "ignorePrevStateNull": true,
-        "ignorePrevStateUnknown": true,
-        "ignorePrevStateUnavailable": true,
-        "ignoreCurrentStateUnknown": false,
-        "ignoreCurrentStateUnavailable": false,
-        "outputProperties": [
-            {
-                "property": "payload",
-                "propertyType": "msg",
-                "value": "",
-                "valueType": "entityState"
-            },
-            {
-                "property": "data",
-                "propertyType": "msg",
-                "value": "",
-                "valueType": "eventData"
-            },
-            {
-                "property": "topic",
-                "propertyType": "msg",
-                "value": "",
-                "valueType": "triggerId"
-            }
-        ],
-        "x": 640,
-        "y": 780,
-        "wires": [
-            [
-                "58ed0332.c37c1c"
-            ],
-            []
-        ]
-    },
-    {
-        "id": "58ed0332.c37c1c",
-        "type": "api-current-state",
-        "z": "5d61e676.b8f7c8",
-        "name": "guest mode off",
-        "server": "391f89a3.583ed6",
-        "version": 2,
-        "outputs": 2,
-        "halt_if": "off",
-        "halt_if_type": "str",
-        "halt_if_compare": "is",
-        "entity_id": "input_boolean.guest_mode",
-        "state_type": "str",
-        "blockInputOverrides": false,
-        "outputProperties": [
-            {
-                "property": "payload",
-                "propertyType": "msg",
-                "value": "",
-                "valueType": "entityState"
-            },
-            {
-                "property": "data",
-                "propertyType": "msg",
-                "value": "",
-                "valueType": "entity"
-            }
-        ],
-        "x": 860,
-        "y": 780,
-        "wires": [
-            [
-                "36caf1dd.765e2e",
-                "16f5801b.bcc6a",
-                "a9a5f67cbd9cbff1"
-            ],
-            []
-        ]
-    },
-    {
-        "id": "36caf1dd.765e2e",
-        "type": "api-call-service",
-        "z": "5d61e676.b8f7c8",
-        "name": "turn off living room lights",
-        "server": "391f89a3.583ed6",
-        "version": 3,
-        "debugenabled": false,
-        "service_domain": "light",
-        "service": "turn_off",
-        "entityId": "group.living_room_lights",
-        "data": "",
-        "dataType": "json",
-        "mergecontext": "",
-        "mustacheAltTags": false,
-        "outputProperties": [],
-        "queue": "none",
-        "x": 1130,
-        "y": 740,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "16f5801b.bcc6a",
-        "type": "api-call-service",
-        "z": "5d61e676.b8f7c8",
-        "name": "turn off entry light",
-        "server": "391f89a3.583ed6",
-        "version": 3,
-        "debugenabled": false,
-        "service_domain": "switch",
-        "service": "turn_off",
-        "entityId": "switch.entryway_light",
-        "data": "",
-        "dataType": "json",
-        "mergecontext": "",
-        "mustacheAltTags": false,
-        "outputProperties": [],
-        "queue": "none",
-        "x": 1110,
-        "y": 840,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "b082f467.6d74b8",
-        "type": "api-current-state",
-        "z": "5d61e676.b8f7c8",
-        "name": "guest mode on",
-        "server": "391f89a3.583ed6",
-        "version": 2,
-        "outputs": 2,
-        "halt_if": "on",
-        "halt_if_type": "str",
-        "halt_if_compare": "is",
-        "entity_id": "input_boolean.guest_mode",
-        "state_type": "str",
-        "blockInputOverrides": false,
-        "outputProperties": [
-            {
-                "property": "payload",
-                "propertyType": "msg",
-                "value": "",
-                "valueType": "entityState"
-            },
-            {
-                "property": "data",
-                "propertyType": "msg",
-                "value": "",
-                "valueType": "entity"
-            }
-        ],
-        "x": 700,
-        "y": 660,
-        "wires": [
-            [
-                "afffe4217dc28f74"
-            ],
-            [
-                "c2ced6fc.1f6f28"
-            ]
-        ]
     },
     {
         "id": "f99e9d07.0a5a9",
@@ -2054,303 +1683,6 @@
                 "f99e9d07.0a5a9"
             ],
             []
-        ]
-    },
-    {
-        "id": "ca564400.ef6808",
-        "type": "server-events",
-        "z": "940272e0.e7353",
-        "name": "zwave scene activated",
-        "server": "391f89a3.583ed6",
-        "version": 1,
-        "event_type": "zwave.scene_activated",
-        "exposeToHomeAssistant": false,
-        "haConfig": [
-            {
-                "property": "name",
-                "value": ""
-            },
-            {
-                "property": "icon",
-                "value": ""
-            }
-        ],
-        "waitForRunning": true,
-        "outputProperties": [
-            {
-                "property": "payload",
-                "propertyType": "msg",
-                "value": "",
-                "valueType": "eventData"
-            },
-            {
-                "property": "topic",
-                "propertyType": "msg",
-                "value": "$outputData(\"eventData\").event_type",
-                "valueType": "jsonata"
-            },
-            {
-                "property": "event_type",
-                "propertyType": "msg",
-                "value": "$outputData(\"eventData\").event_type",
-                "valueType": "jsonata"
-            }
-        ],
-        "x": 100,
-        "y": 140,
-        "wires": [
-            [
-                "b4c177ae.72f8f8"
-            ]
-        ]
-    },
-    {
-        "id": "b4c177ae.72f8f8",
-        "type": "switch",
-        "z": "940272e0.e7353",
-        "name": "is dimmer switch",
-        "property": "payload.entity_id",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "zwave.dimmer_switch",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 1,
-        "x": 310,
-        "y": 140,
-        "wires": [
-            [
-                "b32c3cd6.7cd14"
-            ]
-        ]
-    },
-    {
-        "id": "b32c3cd6.7cd14",
-        "type": "switch",
-        "z": "940272e0.e7353",
-        "name": "",
-        "property": "payload.event.scene_id",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "1",
-                "vt": "num"
-            },
-            {
-                "t": "eq",
-                "v": "2",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 470,
-        "y": 140,
-        "wires": [
-            [
-                "aea0917b.51941"
-            ],
-            [
-                "469baa1e.2581d4"
-            ]
-        ]
-    },
-    {
-        "id": "469baa1e.2581d4",
-        "type": "switch",
-        "z": "940272e0.e7353",
-        "name": "",
-        "property": "payload.event.scene_data",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "0",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "2",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 590,
-        "y": 180,
-        "wires": [
-            [
-                "14729e53.457182",
-                "4a6ef134.bc3ea"
-            ],
-            [
-                "178ae963.37e2f7"
-            ]
-        ],
-        "outputLabels": [
-            "short press down",
-            "long press down"
-        ]
-    },
-    {
-        "id": "65f223f2.356f7c",
-        "type": "server-events",
-        "z": "72c4b6a2.30e0a8",
-        "name": "zigbee event",
-        "server": "391f89a3.583ed6",
-        "version": 1,
-        "event_type": "zha_event",
-        "exposeToHomeAssistant": false,
-        "haConfig": [
-            {
-                "property": "name",
-                "value": ""
-            },
-            {
-                "property": "icon",
-                "value": ""
-            }
-        ],
-        "waitForRunning": true,
-        "outputProperties": [
-            {
-                "property": "payload",
-                "propertyType": "msg",
-                "value": "",
-                "valueType": "eventData"
-            },
-            {
-                "property": "topic",
-                "propertyType": "msg",
-                "value": "$outputData(\"eventData\").event_type",
-                "valueType": "jsonata"
-            },
-            {
-                "property": "event_type",
-                "propertyType": "msg",
-                "value": "$outputData(\"eventData\").event_type",
-                "valueType": "jsonata"
-            }
-        ],
-        "x": 110,
-        "y": 160,
-        "wires": [
-            [
-                "bd62d1cc.d8f03"
-            ]
-        ]
-    },
-    {
-        "id": "bd62d1cc.d8f03",
-        "type": "switch",
-        "z": "72c4b6a2.30e0a8",
-        "name": "is smartthings button",
-        "property": "payload.event.device_ieee",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "28:6d:97:00:01:0b:fa:7c",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 1,
-        "x": 320,
-        "y": 160,
-        "wires": [
-            [
-                "2030783c.ef0758"
-            ]
-        ]
-    },
-    {
-        "id": "10249fda.83d1c",
-        "type": "api-call-service",
-        "z": "72c4b6a2.30e0a8",
-        "name": "bedtime",
-        "server": "391f89a3.583ed6",
-        "version": 3,
-        "debugenabled": false,
-        "service_domain": "input_boolean",
-        "service": "turn_on",
-        "entityId": "input_boolean.bedroom_bedtime_trigger",
-        "data": "",
-        "dataType": "json",
-        "mergecontext": "",
-        "mustacheAltTags": false,
-        "outputProperties": [],
-        "queue": "none",
-        "x": 740,
-        "y": 120,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "5c9cfd78.ca2584",
-        "type": "within-time-switch",
-        "z": "5d61e676.b8f7c8",
-        "name": "dark hours",
-        "nameInt": "",
-        "positionConfig": "c5cbf783.6e13c8",
-        "startTime": "goldenHourDuskStart",
-        "startTimeType": "pdsTime",
-        "startOffset": "-2",
-        "startOffsetType": "num",
-        "startOffsetMultiplier": 3600000,
-        "endTime": "sunriseStart",
-        "endTimeType": "pdsTime",
-        "endOffset": 0,
-        "endOffsetType": "none",
-        "endOffsetMultiplier": 3600000,
-        "timeRestrictions": "",
-        "timeRestrictionsType": "none",
-        "timeDays": "*",
-        "timeOnlyOddDays": false,
-        "timeOnlyEvenDays": false,
-        "timeMonths": "*",
-        "timedatestart": "",
-        "timedateend": "",
-        "propertyStart": "",
-        "propertyStartType": "none",
-        "propertyStartCompare": "true",
-        "propertyStartThreshold": "",
-        "propertyStartThresholdType": "num",
-        "startTimeAlt": "",
-        "startTimeAltType": "entered",
-        "startOffsetAlt": 0,
-        "startOffsetAltType": "none",
-        "startOffsetAltMultiplier": 60000,
-        "propertyEnd": "",
-        "propertyEndType": "none",
-        "propertyEndCompare": "true",
-        "propertyEndThreshold": "",
-        "propertyEndThresholdType": "num",
-        "endTimeAlt": "",
-        "endTimeAltType": "entered",
-        "endOffsetAlt": 0,
-        "endOffsetAltType": "none",
-        "endOffsetAltMultiplier": 60000,
-        "tsCompare": "0",
-        "x": 350,
-        "y": 640,
-        "wires": [
-            [
-                "b082f467.6d74b8"
-            ],
-            [
-                "905501bb0288d441"
-            ]
         ]
     },
     {
@@ -2545,57 +1877,386 @@
         "wires": []
     },
     {
-        "id": "afffe4217dc28f74",
-        "type": "api-get-history",
-        "z": "5d61e676.b8f7c8",
-        "name": "entry light last 2 mins",
+        "id": "86825f0872341606",
+        "type": "switch",
+        "z": "ba8902ff.b6359",
+        "name": "room is dark",
+        "property": "room_brightness",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "lt",
+                "v": "8",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 1430,
+        "y": 280,
+        "wires": [
+            [
+                "11cc4bc0.752e84"
+            ]
+        ]
+    },
+    {
+        "id": "50acd288975310b9",
+        "type": "within-time-switch",
+        "z": "ba8902ff.b6359",
+        "name": "dark hours",
+        "nameInt": "",
+        "positionConfig": "c5cbf783.6e13c8",
+        "startTime": "goldenHourDuskStart",
+        "startTimeType": "pdsTime",
+        "startOffset": "-2",
+        "startOffsetType": "num",
+        "startOffsetMultiplier": 3600000,
+        "endTime": "sunriseStart",
+        "endTimeType": "pdsTime",
+        "endOffset": 0,
+        "endOffsetType": "none",
+        "endOffsetMultiplier": 3600000,
+        "timeRestrictions": "",
+        "timeRestrictionsType": "none",
+        "timeDays": "*",
+        "timeOnlyOddDays": false,
+        "timeOnlyEvenDays": false,
+        "timeMonths": "*",
+        "timedatestart": "",
+        "timedateend": "",
+        "propertyStart": "",
+        "propertyStartType": "none",
+        "propertyStartCompare": "true",
+        "propertyStartThreshold": "",
+        "propertyStartThresholdType": "num",
+        "startTimeAlt": "",
+        "startTimeAltType": "entered",
+        "startOffsetAlt": 0,
+        "startOffsetAltType": "none",
+        "startOffsetAltMultiplier": 60000,
+        "propertyEnd": "",
+        "propertyEndType": "none",
+        "propertyEndCompare": "true",
+        "propertyEndThreshold": "",
+        "propertyEndThresholdType": "num",
+        "endTimeAlt": "",
+        "endTimeAltType": "entered",
+        "endOffsetAlt": 0,
+        "endOffsetAltType": "none",
+        "endOffsetAltMultiplier": 60000,
+        "tsCompare": "0",
+        "x": 1270,
+        "y": 240,
+        "wires": [
+            [
+                "11cc4bc0.752e84"
+            ],
+            [
+                "86825f0872341606"
+            ]
+        ]
+    },
+    {
+        "id": "a979de5c.73fec",
+        "type": "trigger-state",
+        "z": "79fa72c5.6e4ccc",
+        "name": "tv changes inputs",
         "server": "391f89a3.583ed6",
         "version": 0,
-        "startdate": "",
-        "enddate": "",
-        "entityid": "switch.entryway_light",
-        "entityidtype": "is",
-        "useRelativeTime": true,
-        "relativeTime": "1 minutes",
-        "flatten": true,
-        "output_type": "array",
-        "output_location_type": "msg",
-        "output_location": "payload",
-        "x": 920,
-        "y": 640,
+        "exposeToHomeAssistant": false,
+        "haConfig": [
+            {
+                "property": "name",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            }
+        ],
+        "entityid": "media_player.lg_tv",
+        "entityidfiltertype": "exact",
+        "debugenabled": false,
+        "constraints": [],
+        "outputs": 2,
+        "customoutputs": [],
+        "outputinitially": false,
+        "state_type": "str",
+        "x": 310,
+        "y": 340,
         "wires": [
             [
-                "aa982517f7627b17"
-            ]
+                "2b65810f22342e72"
+            ],
+            []
         ]
     },
     {
-        "id": "aa982517f7627b17",
-        "type": "function",
-        "z": "5d61e676.b8f7c8",
-        "name": "was not previously on",
-        "func": "var on = false;\nfor (var idx in msg.payload) {\n    if (msg.payload[idx].state == \"on\") {\n        on = true;\n        break;\n    }\n}\nif (!on) { return msg; }",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1160,
-        "y": 640,
+        "id": "5f3a0448.3348ec",
+        "type": "api-current-state",
+        "z": "79fa72c5.6e4ccc",
+        "name": "main lights on",
+        "server": "391f89a3.583ed6",
+        "version": 2,
+        "outputs": 2,
+        "halt_if": "on",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "light.brilliant",
+        "state_type": "str",
+        "blockInputOverrides": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            }
+        ],
+        "x": 320,
+        "y": 400,
         "wires": [
             [
-                "f5323bbd.6bafa8"
-            ]
+                "e77dcb.b1b1c238"
+            ],
+            []
         ]
     },
     {
-        "id": "a9a5f67cbd9cbff1",
-        "type": "subflow:627ae423.cdc09c",
-        "z": "5d61e676.b8f7c8",
+        "id": "e77dcb.b1b1c238",
+        "type": "api-call-service",
+        "z": "79fa72c5.6e4ccc",
+        "name": "set movie watching scene",
+        "server": "391f89a3.583ed6",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "scene",
+        "service": "turn_on",
+        "entityId": "scene.movie_watching",
+        "data": "{\"transition\":10}",
+        "dataType": "json",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 550,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2f9cf67d.87054a",
+        "type": "api-call-service",
+        "z": "79fa72c5.6e4ccc",
+        "name": "turn on overhead lights",
+        "server": "391f89a3.583ed6",
+        "version": 3,
+        "debugenabled": true,
+        "service_domain": "light",
+        "service": "turn_on",
+        "entityId": "light.brilliant",
+        "data": "{\"brightness_pct\":\"5\"}",
+        "dataType": "json",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 1210,
+        "y": 460,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b7ede1fc.b6954",
+        "type": "api-call-service",
+        "z": "79fa72c5.6e4ccc",
+        "name": "turn on table lamp",
+        "server": "391f89a3.583ed6",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "light",
+        "service": "turn_on",
+        "entityId": "light.table_lamp",
+        "data": "{\"transition\":\"3\", \"brightness_pct\": \"100\"}",
+        "dataType": "json",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 1330,
+        "y": 580,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4e9a16bb.c9eeb8",
+        "type": "api-current-state",
+        "z": "79fa72c5.6e4ccc",
+        "name": "overhead lights are off",
+        "server": "391f89a3.583ed6",
+        "version": 2,
+        "outputs": 2,
+        "halt_if": "off",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "light.brilliant",
+        "state_type": "str",
+        "blockInputOverrides": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            }
+        ],
+        "x": 740,
+        "y": 460,
+        "wires": [
+            [
+                "2e516682dfa91418"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "61a1e761.280e28",
+        "type": "subflow:eddddd53.6ebb3",
+        "z": "79fa72c5.6e4ccc",
         "name": "",
-        "x": 1100,
-        "y": 800,
-        "wires": []
+        "env": [],
+        "x": 400,
+        "y": 540,
+        "wires": [
+            [
+                "ce532f7c3325e8c0"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "4365276c.14da98",
+        "type": "server-state-changed",
+        "z": "79fa72c5.6e4ccc",
+        "name": "Guest Mode Toggled",
+        "server": "391f89a3.583ed6",
+        "version": 3,
+        "exposeToHomeAssistant": false,
+        "haConfig": [
+            {
+                "property": "name",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            }
+        ],
+        "entityidfilter": "input_boolean.guest_mode",
+        "entityidfiltertype": "exact",
+        "outputinitially": false,
+        "state_type": "str",
+        "haltifstate": "on",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "outputs": 2,
+        "output_only_on_state_change": true,
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "eventData"
+            },
+            {
+                "property": "topic",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "triggerId"
+            }
+        ],
+        "x": 400,
+        "y": 720,
+        "wires": [
+            [
+                "dee738a0.22aad8"
+            ],
+            [
+                "f3649d77.a8add"
+            ]
+        ]
+    },
+    {
+        "id": "dee738a0.22aad8",
+        "type": "api-call-service",
+        "z": "79fa72c5.6e4ccc",
+        "name": "turn on blind block",
+        "server": "391f89a3.583ed6",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "input_boolean",
+        "service": "turn_on",
+        "entityId": "input_boolean.block_automatic_blinds",
+        "data": "",
+        "dataType": "json",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 610,
+        "y": 700,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f3649d77.a8add",
+        "type": "api-call-service",
+        "z": "79fa72c5.6e4ccc",
+        "name": "turn off blind block",
+        "server": "391f89a3.583ed6",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "input_boolean",
+        "service": "turn_off",
+        "entityId": "input_boolean.block_automatic_blinds",
+        "data": "",
+        "dataType": "json",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 610,
+        "y": 740,
+        "wires": [
+            []
+        ]
     },
     {
         "id": "2b65810f22342e72",
@@ -2632,6 +2293,7 @@
         "randomUnits": "seconds",
         "drop": false,
         "allowrate": false,
+        "outputs": 1,
         "x": 940,
         "y": 460,
         "wires": [
@@ -2913,6 +2575,7 @@
         "randomUnits": "seconds",
         "drop": false,
         "allowrate": false,
+        "outputs": 1,
         "x": 800,
         "y": 540,
         "wires": [
@@ -2922,59 +2585,300 @@
         ]
     },
     {
-        "id": "905501bb0288d441",
-        "type": "switch",
+        "id": "780f660f.1af758",
+        "type": "server-state-changed",
         "z": "5d61e676.b8f7c8",
-        "name": "room is dark",
-        "property": "room_brightness",
-        "propertyType": "global",
-        "rules": [
+        "name": "front door open",
+        "server": "391f89a3.583ed6",
+        "version": 3,
+        "exposeToHomeAssistant": false,
+        "haConfig": [
             {
-                "t": "lt",
-                "v": "10",
-                "vt": "num"
+                "property": "name",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
             }
         ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 1,
-        "x": 510,
-        "y": 700,
+        "entityidfilter": "binary_sensor.front_door",
+        "entityidfiltertype": "exact",
+        "outputinitially": false,
+        "state_type": "str",
+        "haltifstate": "on",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "outputs": 2,
+        "output_only_on_state_change": true,
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "eventData"
+            },
+            {
+                "property": "topic",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "triggerId"
+            }
+        ],
+        "x": 160,
+        "y": 640,
         "wires": [
             [
-                "b082f467.6d74b8"
+                "5c9cfd78.ca2584"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "f5323bbd.6bafa8",
+        "type": "api-call-service",
+        "z": "5d61e676.b8f7c8",
+        "name": "turn on entry light",
+        "server": "391f89a3.583ed6",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "switch",
+        "service": "turn_on",
+        "entityId": "switch.entryway_light",
+        "data": "",
+        "dataType": "json",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 1450,
+        "y": 660,
+        "wires": [
+            [
+                "edc50e9eaf7958ca"
             ]
         ]
     },
     {
-        "id": "86825f0872341606",
-        "type": "switch",
-        "z": "ba8902ff.b6359",
-        "name": "room is dark",
-        "property": "room_brightness",
-        "propertyType": "global",
-        "rules": [
-            {
-                "t": "lt",
-                "v": "8",
-                "vt": "num"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
+        "id": "bd529406.6df2c8",
+        "type": "function",
+        "z": "5d61e676.b8f7c8",
+        "name": "not home",
+        "func": "for (var idx in msg.payload) {\n    if (msg.payload[idx].state == \"not_home\") {\n        return msg;\n    }\n}",
         "outputs": 1,
-        "x": 1430,
-        "y": 280,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 1200,
+        "y": 680,
         "wires": [
             [
-                "11cc4bc0.752e84"
+                "f5323bbd.6bafa8"
             ]
         ]
     },
     {
-        "id": "50acd288975310b9",
+        "id": "c2ced6fc.1f6f28",
+        "type": "api-get-history",
+        "z": "5d61e676.b8f7c8",
+        "name": "presence last 2 mins",
+        "server": "391f89a3.583ed6",
+        "version": 0,
+        "startdate": "",
+        "enddate": "",
+        "entityid": "person.gautam",
+        "entityidtype": "is",
+        "useRelativeTime": true,
+        "relativeTime": "2 minutes",
+        "flatten": true,
+        "output_type": "array",
+        "output_location_type": "msg",
+        "output_location": "payload",
+        "x": 920,
+        "y": 680,
+        "wires": [
+            [
+                "bd529406.6df2c8"
+            ]
+        ]
+    },
+    {
+        "id": "d8a3a07c.8d65c",
+        "type": "server-state-changed",
+        "z": "5d61e676.b8f7c8",
+        "name": "someone leaves home",
+        "server": "391f89a3.583ed6",
+        "version": 3,
+        "exposeToHomeAssistant": false,
+        "haConfig": [
+            {
+                "property": "name",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            }
+        ],
+        "entityidfilter": "person.gautam",
+        "entityidfiltertype": "exact",
+        "outputinitially": false,
+        "state_type": "str",
+        "haltifstate": "not_home",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "outputs": 2,
+        "output_only_on_state_change": true,
+        "for": "2",
+        "forType": "num",
+        "forUnits": "minutes",
+        "ignorePrevStateNull": true,
+        "ignorePrevStateUnknown": true,
+        "ignorePrevStateUnavailable": true,
+        "ignoreCurrentStateUnknown": false,
+        "ignoreCurrentStateUnavailable": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "eventData"
+            },
+            {
+                "property": "topic",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "triggerId"
+            }
+        ],
+        "x": 640,
+        "y": 780,
+        "wires": [
+            [
+                "58ed0332.c37c1c"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "58ed0332.c37c1c",
+        "type": "api-current-state",
+        "z": "5d61e676.b8f7c8",
+        "name": "guest mode off",
+        "server": "391f89a3.583ed6",
+        "version": 2,
+        "outputs": 2,
+        "halt_if": "off",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_boolean.guest_mode",
+        "state_type": "str",
+        "blockInputOverrides": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            }
+        ],
+        "x": 860,
+        "y": 780,
+        "wires": [
+            [
+                "16f5801b.bcc6a",
+                "a9a5f67cbd9cbff1"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "16f5801b.bcc6a",
+        "type": "api-call-service",
+        "z": "5d61e676.b8f7c8",
+        "name": "turn off outside lights",
+        "server": "391f89a3.583ed6",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "homeassistant",
+        "service": "turn_off",
+        "entityId": "group.outside_lights",
+        "data": "",
+        "dataType": "json",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 1120,
+        "y": 800,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b082f467.6d74b8",
+        "type": "api-current-state",
+        "z": "5d61e676.b8f7c8",
+        "name": "guest mode on",
+        "server": "391f89a3.583ed6",
+        "version": 2,
+        "outputs": 2,
+        "halt_if": "on",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_boolean.guest_mode",
+        "state_type": "str",
+        "blockInputOverrides": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            }
+        ],
+        "x": 700,
+        "y": 660,
+        "wires": [
+            [
+                "afffe4217dc28f74"
+            ],
+            [
+                "c2ced6fc.1f6f28"
+            ]
+        ]
+    },
+    {
+        "id": "5c9cfd78.ca2584",
         "type": "within-time-switch",
-        "z": "ba8902ff.b6359",
+        "z": "5d61e676.b8f7c8",
         "name": "dark hours",
         "nameInt": "",
         "positionConfig": "c5cbf783.6e13c8",
@@ -3017,15 +2921,116 @@
         "endOffsetAltType": "none",
         "endOffsetAltMultiplier": 60000,
         "tsCompare": "0",
-        "x": 1270,
-        "y": 240,
+        "x": 350,
+        "y": 640,
         "wires": [
             [
-                "11cc4bc0.752e84"
+                "b082f467.6d74b8"
             ],
             [
-                "86825f0872341606"
+                "905501bb0288d441"
             ]
+        ]
+    },
+    {
+        "id": "afffe4217dc28f74",
+        "type": "api-get-history",
+        "z": "5d61e676.b8f7c8",
+        "name": "entry light last 2 mins",
+        "server": "391f89a3.583ed6",
+        "version": 0,
+        "startdate": "",
+        "enddate": "",
+        "entityid": "switch.entryway_light",
+        "entityidtype": "is",
+        "useRelativeTime": true,
+        "relativeTime": "1 minutes",
+        "flatten": true,
+        "output_type": "array",
+        "output_location_type": "msg",
+        "output_location": "payload",
+        "x": 920,
+        "y": 640,
+        "wires": [
+            [
+                "aa982517f7627b17"
+            ]
+        ]
+    },
+    {
+        "id": "aa982517f7627b17",
+        "type": "function",
+        "z": "5d61e676.b8f7c8",
+        "name": "was not previously on",
+        "func": "var on = false;\nfor (var idx in msg.payload) {\n    if (msg.payload[idx].state == \"on\") {\n        on = true;\n        break;\n    }\n}\nif (!on) { return msg; }",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1160,
+        "y": 640,
+        "wires": [
+            [
+                "f5323bbd.6bafa8"
+            ]
+        ]
+    },
+    {
+        "id": "a9a5f67cbd9cbff1",
+        "type": "subflow:627ae423.cdc09c",
+        "z": "5d61e676.b8f7c8",
+        "name": "",
+        "x": 1100,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "905501bb0288d441",
+        "type": "switch",
+        "z": "5d61e676.b8f7c8",
+        "name": "room is dark",
+        "property": "room_brightness",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "lt",
+                "v": "10",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 510,
+        "y": 700,
+        "wires": [
+            [
+                "b082f467.6d74b8"
+            ]
+        ]
+    },
+    {
+        "id": "edc50e9eaf7958ca",
+        "type": "api-call-service",
+        "z": "5d61e676.b8f7c8",
+        "name": "turn on kitchen light",
+        "server": "391f89a3.583ed6",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "switch",
+        "service": "turn_on",
+        "entityId": "switch.kitchen_overhead_lights",
+        "data": "",
+        "dataType": "json",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 1680,
+        "y": 660,
+        "wires": [
+            []
         ]
     }
 ]
