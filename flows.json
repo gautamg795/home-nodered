@@ -1513,8 +1513,8 @@
         "for": 0,
         "forType": "num",
         "forUnits": "minutes",
-        "x": 960,
-        "y": 360,
+        "x": 1080,
+        "y": 460,
         "wires": [
             [
                 "4a5a28ba.37ee28"
@@ -1589,8 +1589,8 @@
         "for": 0,
         "forType": "num",
         "forUnits": "minutes",
-        "x": 1210,
-        "y": 360,
+        "x": 1330,
+        "y": 460,
         "wires": [
             [],
             [
@@ -1604,8 +1604,8 @@
         "z": "ba8902ff.b6359",
         "name": "",
         "env": [],
-        "x": 1410,
-        "y": 360,
+        "x": 1530,
+        "y": 460,
         "wires": []
     },
     {
@@ -1763,7 +1763,7 @@
         "id": "f84bac05b1c7a332",
         "type": "server-state-changed",
         "z": "ba8902ff.b6359",
-        "name": "motion not detected 10m",
+        "name": "occupancy not detected 1m",
         "server": "391f89a3.583ed6",
         "version": 4,
         "exposeToHomeAssistant": false,
@@ -1777,7 +1777,7 @@
                 "value": ""
             }
         ],
-        "entityidfilter": "group.bedroom_occupancy",
+        "entityidfilter": "binary_sensor.aqara_lumi_motion_ac01_occupancy",
         "entityidfiltertype": "exact",
         "outputinitially": false,
         "state_type": "str",
@@ -1786,7 +1786,7 @@
         "halt_if_compare": "is",
         "outputs": 2,
         "output_only_on_state_change": true,
-        "for": "10",
+        "for": "1",
         "forType": "num",
         "forUnits": "minutes",
         "ignorePrevStateNull": false,
@@ -1814,8 +1814,8 @@
                 "valueType": "triggerId"
             }
         ],
-        "x": 690,
-        "y": 360,
+        "x": 820,
+        "y": 460,
         "wires": [
             [
                 "4c156b2d.d92d74"
@@ -1934,8 +1934,8 @@
         "outputinitially": false,
         "state_type": "str",
         "enableInput": true,
-        "x": 810,
-        "y": 440,
+        "x": 890,
+        "y": 580,
         "wires": [
             [
                 "25bca3bd5e999621"
@@ -1948,8 +1948,8 @@
         "type": "subflow:627ae423.cdc09c",
         "z": "ba8902ff.b6359",
         "name": "",
-        "x": 1020,
-        "y": 440,
+        "x": 1100,
+        "y": 580,
         "wires": []
     },
     {
@@ -2031,6 +2031,59 @@
             ],
             [
                 "86825f0872341606"
+            ]
+        ]
+    },
+    {
+        "id": "2ee86526056ca4eb",
+        "type": "ha-device",
+        "z": "ba8902ff.b6359",
+        "name": "occupancy \"enter\"",
+        "server": "391f89a3.583ed6",
+        "version": 0,
+        "debugenabled": false,
+        "exposeToHomeAssistant": false,
+        "haConfig": [
+            {
+                "property": "name",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            }
+        ],
+        "inputs": 0,
+        "deviceType": "trigger",
+        "device": "a4628ce747aef70da5ba686f1aeeb82f",
+        "event": {
+            "device_id": "a4628ce747aef70da5ba686f1aeeb82f",
+            "domain": "zha",
+            "platform": "device",
+            "type": "Enter",
+            "subtype": "sensor",
+            "metadata": {}
+        },
+        "capabilities": [],
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "eventData"
+            },
+            {
+                "property": "topic",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "triggerId"
+            }
+        ],
+        "x": 490,
+        "y": 360,
+        "wires": [
+            [
+                "8185fd5c.f22a2"
             ]
         ]
     },
@@ -3263,65 +3316,6 @@
         ]
     },
     {
-        "id": "780f660f.1af758",
-        "type": "server-state-changed",
-        "z": "5d61e676.b8f7c8",
-        "name": "front door open",
-        "server": "391f89a3.583ed6",
-        "version": 4,
-        "exposeToHomeAssistant": false,
-        "haConfig": [
-            {
-                "property": "name",
-                "value": ""
-            },
-            {
-                "property": "icon",
-                "value": ""
-            }
-        ],
-        "entityidfilter": "binary_sensor.front_door",
-        "entityidfiltertype": "exact",
-        "outputinitially": false,
-        "state_type": "str",
-        "haltifstate": "on",
-        "halt_if_type": "str",
-        "halt_if_compare": "is",
-        "outputs": 2,
-        "output_only_on_state_change": true,
-        "for": "0",
-        "forType": "num",
-        "forUnits": "minutes",
-        "outputProperties": [
-            {
-                "property": "payload",
-                "propertyType": "msg",
-                "value": "",
-                "valueType": "entityState"
-            },
-            {
-                "property": "data",
-                "propertyType": "msg",
-                "value": "",
-                "valueType": "eventData"
-            },
-            {
-                "property": "topic",
-                "propertyType": "msg",
-                "value": "",
-                "valueType": "triggerId"
-            }
-        ],
-        "x": 160,
-        "y": 640,
-        "wires": [
-            [
-                "5c9cfd78.ca2584"
-            ],
-            []
-        ]
-    },
-    {
         "id": "f5323bbd.6bafa8",
         "type": "api-call-service",
         "z": "5d61e676.b8f7c8",
@@ -3380,13 +3374,13 @@
         "entityid": "person.gautam",
         "entityidtype": "is",
         "useRelativeTime": true,
-        "relativeTime": "2 minutes",
+        "relativeTime": "3 minutes",
         "flatten": true,
         "output_type": "array",
         "output_location_type": "msg",
         "output_location": "payload",
         "x": 920,
-        "y": 680,
+        "y": 700,
         "wires": [
             [
                 "bd529406.6df2c8"
@@ -3613,6 +3607,8 @@
         "endOffsetAlt": 0,
         "endOffsetAltType": "none",
         "endOffsetAltMultiplier": 60000,
+        "withinTimeValueType": "msgInput",
+        "outOfTimeValueType": "msgInput",
         "tsCompare": "0",
         "x": 350,
         "y": 640,
@@ -3620,9 +3616,7 @@
             [
                 "b082f467.6d74b8"
             ],
-            [
-                "905501bb0288d441"
-            ]
+            []
         ]
     },
     {
@@ -3677,31 +3671,6 @@
         "x": 1100,
         "y": 760,
         "wires": []
-    },
-    {
-        "id": "905501bb0288d441",
-        "type": "switch",
-        "z": "5d61e676.b8f7c8",
-        "name": "room is dark",
-        "property": "room_brightness",
-        "propertyType": "global",
-        "rules": [
-            {
-                "t": "lt",
-                "v": "10",
-                "vt": "num"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 1,
-        "x": 510,
-        "y": 700,
-        "wires": [
-            [
-                "b082f467.6d74b8"
-            ]
-        ]
     },
     {
         "id": "edc50e9eaf7958ca",
@@ -3844,6 +3813,61 @@
         "y": 900,
         "wires": [
             []
+        ]
+    },
+    {
+        "id": "a3ed09efdfba9cc0",
+        "type": "ha-device",
+        "z": "5d61e676.b8f7c8",
+        "name": "front door opened",
+        "server": "391f89a3.583ed6",
+        "version": 0,
+        "debugenabled": false,
+        "exposeToHomeAssistant": false,
+        "haConfig": [
+            {
+                "property": "name",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            }
+        ],
+        "inputs": 0,
+        "deviceType": "trigger",
+        "device": "2c0f139b3ce74a96bbeca6dc6ff7806d",
+        "event": {
+            "type": "opened",
+            "platform": "device",
+            "device_id": "2c0f139b3ce74a96bbeca6dc6ff7806d",
+            "entity_id": "binary_sensor.front_door",
+            "domain": "binary_sensor",
+            "metadata": {
+                "secondary": false
+            }
+        },
+        "capabilities": [],
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "eventData"
+            },
+            {
+                "property": "topic",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "triggerId"
+            }
+        ],
+        "x": 150,
+        "y": 640,
+        "wires": [
+            [
+                "5c9cfd78.ca2584"
+            ]
         ]
     }
 ]
