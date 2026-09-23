@@ -198,7 +198,7 @@
         "id": "391f89a3.583ed6",
         "type": "server",
         "name": "Home Assistant",
-        "version": 4,
+        "version": 5,
         "addon": false,
         "rejectUnauthorizedCerts": true,
         "ha_boolean": "y|yes|true|on|home|open",
@@ -214,7 +214,8 @@
         "statusMonth": "short",
         "statusDay": "numeric",
         "statusHourCycle": "h23",
-        "statusTimeFormat": "h:m"
+        "statusTimeFormat": "h:m",
+        "enableGlobalContextStore": true
     },
     {
         "id": "c5cbf783.6e13c8",
@@ -228,6 +229,46 @@
         "timeZoneDST": 0,
         "stateTimeFormat": "3",
         "stateDateFormat": "12"
+    },
+    {
+        "id": "2ee86526056ca4eb",
+        "type": "ha-entity-config",
+        "server": "391f89a3.583ed6",
+        "deviceConfig": "",
+        "name": "exposed as for occupancy \"enter\"",
+        "version": 6,
+        "entityType": "switch",
+        "haConfig": [
+            {
+                "property": "name",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            }
+        ],
+        "resend": false
+    },
+    {
+        "id": "a3ed09efdfba9cc0",
+        "type": "ha-entity-config",
+        "server": "391f89a3.583ed6",
+        "deviceConfig": "",
+        "name": "exposed as for front door opened",
+        "version": 6,
+        "entityType": "switch",
+        "haConfig": [
+            {
+                "property": "name",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            }
+        ],
+        "resend": false
     },
     {
         "id": "4f8255ec.d9e7bc",
@@ -276,31 +317,41 @@
         "id": "55030368.06f6ac",
         "type": "poll-state",
         "z": "52a854ab.b0524c",
-        "name": "poll brightness 15s",
+        "name": "poll brightness 30s",
         "server": "391f89a3.583ed6",
-        "version": 2,
-        "exposeToHomeAssistant": false,
-        "haConfig": [
-            {
-                "property": "name",
-                "value": ""
-            },
-            {
-                "property": "icon",
-                "value": ""
-            }
-        ],
-        "updateinterval": "30",
+        "version": 3,
+        "exposeAsEntityConfig": "",
+        "updateInterval": "30",
         "updateIntervalType": "num",
         "updateIntervalUnits": "seconds",
-        "outputinitially": true,
-        "outputonchanged": false,
-        "entity_id": "sensor.aeon_labs_zw100_multisensor_6_luminance",
-        "state_type": "num",
-        "halt_if": "",
-        "halt_if_type": "str",
-        "halt_if_compare": "is",
+        "outputInitially": true,
+        "outputOnChanged": false,
+        "entityId": "sensor.aeon_labs_zw100_multisensor_6_luminance",
+        "stateType": "num",
+        "ifState": "",
+        "ifStateType": "str",
+        "ifStateOperator": "is",
         "outputs": 1,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "topic",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "triggerId"
+            }
+        ],
         "x": 170,
         "y": 120,
         "wires": [
@@ -315,27 +366,17 @@
         "z": "52a854ab.b0524c",
         "name": "brightness changed",
         "server": "391f89a3.583ed6",
-        "version": 4,
-        "exposeToHomeAssistant": false,
-        "haConfig": [
-            {
-                "property": "name",
-                "value": ""
-            },
-            {
-                "property": "icon",
-                "value": ""
-            }
-        ],
-        "entityidfilter": "sensor.aeon_labs_zw100_multisensor_6_luminance",
-        "entityidfiltertype": "exact",
-        "outputinitially": true,
-        "state_type": "num",
-        "haltifstate": "",
-        "halt_if_type": "str",
-        "halt_if_compare": "is",
+        "version": 5,
         "outputs": 1,
-        "output_only_on_state_change": true,
+        "exposeAsEntityConfig": "",
+        "entityId": "sensor.aeon_labs_zw100_multisensor_6_luminance",
+        "entityIdType": "exact",
+        "outputInitially": true,
+        "stateType": "num",
+        "ifState": "",
+        "ifStateType": "str",
+        "ifStateOperator": "is",
+        "outputOnlyOnStateChange": true,
         "for": "0",
         "forType": "num",
         "forUnits": "minutes",
@@ -373,17 +414,17 @@
         "z": "52a854ab.b0524c",
         "name": "",
         "server": "391f89a3.583ed6",
-        "version": 0,
-        "startdate": "",
-        "enddate": "",
-        "entityid": "light.bedroom_overhead_lights",
-        "entityidtype": "is",
+        "version": 1,
+        "startDate": "",
+        "endDate": "",
+        "entityId": "light.bedroom_overhead_lights",
+        "entityIdType": "equals",
         "useRelativeTime": true,
         "relativeTime": "10 seconds",
         "flatten": true,
-        "output_type": "array",
-        "output_location_type": "msg",
-        "output_location": "history",
+        "outputType": "array",
+        "outputLocationType": "msg",
+        "outputLocation": "history",
         "x": 490,
         "y": 140,
         "wires": [
@@ -535,19 +576,9 @@
         "z": "940272e0.e7353",
         "name": "zwave scene activated",
         "server": "391f89a3.583ed6",
-        "version": 1,
-        "event_type": "zwave.scene_activated",
-        "exposeToHomeAssistant": false,
-        "haConfig": [
-            {
-                "property": "name",
-                "value": ""
-            },
-            {
-                "property": "icon",
-                "value": ""
-            }
-        ],
+        "version": 3,
+        "exposeAsEntityConfig": "",
+        "eventType": "zwave.scene_activated",
         "waitForRunning": true,
         "outputProperties": [
             {
@@ -679,7 +710,18 @@
         "z": "eddddd53.6ebb3",
         "name": "tv changes inputs",
         "server": "391f89a3.583ed6",
-        "version": 2,
+        "version": 4,
+        "inputs": 1,
+        "outputs": 2,
+        "exposeAsEntityConfig": "",
+        "entityId": "media_player.lg_tv",
+        "entityIdType": "exact",
+        "debugEnabled": false,
+        "constraints": [],
+        "customOutputs": [],
+        "outputInitially": false,
+        "stateType": "str",
+        "enableInput": true,
         "exposeToHomeAssistant": false,
         "haConfig": [
             {
@@ -691,16 +733,6 @@
                 "value": ""
             }
         ],
-        "entityid": "media_player.lg_tv",
-        "entityidfiltertype": "exact",
-        "debugenabled": false,
-        "constraints": [],
-        "inputs": 1,
-        "outputs": 2,
-        "customoutputs": [],
-        "outputinitially": false,
-        "state_type": "str",
-        "enableInput": true,
         "x": 190,
         "y": 100,
         "wires": [
@@ -813,27 +845,17 @@
         "z": "26e3222a.ef8a1e",
         "name": "bedroom dummy trigger turned on",
         "server": "391f89a3.583ed6",
-        "version": 4,
-        "exposeToHomeAssistant": false,
-        "haConfig": [
-            {
-                "property": "name",
-                "value": ""
-            },
-            {
-                "property": "icon",
-                "value": ""
-            }
-        ],
-        "entityidfilter": "input_boolean\\.bedroom_\\w+_trigger",
-        "entityidfiltertype": "regex",
-        "outputinitially": false,
-        "state_type": "str",
-        "haltifstate": "on",
-        "halt_if_type": "str",
-        "halt_if_compare": "is",
+        "version": 5,
         "outputs": 2,
-        "output_only_on_state_change": true,
+        "exposeAsEntityConfig": "",
+        "entityId": "input_boolean\\.bedroom_\\w+_trigger",
+        "entityIdType": "regex",
+        "outputInitially": false,
+        "stateType": "str",
+        "ifState": "on",
+        "ifStateType": "str",
+        "ifStateOperator": "is",
+        "outputOnlyOnStateChange": true,
         "for": "0",
         "forType": "num",
         "forUnits": "minutes",
@@ -947,7 +969,7 @@
         "z": "26e3222a.ef8a1e",
         "name": "get all dummy triggers",
         "server": "391f89a3.583ed6",
-        "version": 0,
+        "version": 1,
         "rules": [
             {
                 "property": "entity_id",
@@ -962,11 +984,11 @@
                 "valueType": "msg"
             }
         ],
-        "output_type": "array",
-        "output_empty_results": true,
-        "output_location_type": "msg",
-        "output_location": "payload",
-        "output_results_count": 1,
+        "outputType": "array",
+        "outputEmptyResults": true,
+        "outputLocationType": "msg",
+        "outputLocation": "payload",
+        "outputResultsCount": 1,
         "x": 500,
         "y": 160,
         "wires": [
@@ -1203,19 +1225,9 @@
         "z": "72c4b6a2.30e0a8",
         "name": "zigbee event",
         "server": "391f89a3.583ed6",
-        "version": 1,
-        "event_type": "zha_event",
-        "exposeToHomeAssistant": false,
-        "haConfig": [
-            {
-                "property": "name",
-                "value": ""
-            },
-            {
-                "property": "icon",
-                "value": ""
-            }
-        ],
+        "version": 3,
+        "exposeAsEntityConfig": "",
+        "eventType": "zha_event",
         "waitForRunning": true,
         "outputProperties": [
             {
@@ -1317,27 +1329,17 @@
         "z": "ba8902ff.b6359",
         "name": "motion detected",
         "server": "391f89a3.583ed6",
-        "version": 4,
-        "exposeToHomeAssistant": false,
-        "haConfig": [
-            {
-                "property": "name",
-                "value": ""
-            },
-            {
-                "property": "icon",
-                "value": ""
-            }
-        ],
-        "entityidfilter": "binary_sensor.bedroom_motion",
-        "entityidfiltertype": "exact",
-        "outputinitially": false,
-        "state_type": "str",
-        "haltifstate": "on",
-        "halt_if_type": "str",
-        "halt_if_compare": "is",
+        "version": 5,
         "outputs": 2,
-        "output_only_on_state_change": true,
+        "exposeAsEntityConfig": "",
+        "entityId": "binary_sensor.bedroom_motion",
+        "entityIdType": "exact",
+        "outputInitially": false,
+        "stateType": "str",
+        "ifState": "on",
+        "ifStateType": "str",
+        "ifStateOperator": "is",
+        "outputOnlyOnStateChange": true,
         "for": "0",
         "forType": "num",
         "forUnits": "minutes",
@@ -1379,7 +1381,7 @@
         "id": "8185fd5c.f22a2",
         "type": "api-current-state",
         "z": "ba8902ff.b6359",
-        "name": "check if light is off",
+        "name": "floor lamp is off",
         "server": "391f89a3.583ed6",
         "version": 3,
         "outputs": 2,
@@ -1406,7 +1408,87 @@
         "for": 0,
         "forType": "num",
         "forUnits": "minutes",
-        "x": 810,
+        "x": 800,
+        "y": 240,
+        "wires": [
+            [
+                "14f639759fb42df0"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "14f639759fb42df0",
+        "type": "api-current-state",
+        "z": "ba8902ff.b6359",
+        "name": "overhead lights are off",
+        "server": "391f89a3.583ed6",
+        "version": 3,
+        "outputs": 2,
+        "halt_if": "off",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "light.bedroom_overhead_lights",
+        "state_type": "str",
+        "blockInputOverrides": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            }
+        ],
+        "for": 0,
+        "forType": "num",
+        "forUnits": "minutes",
+        "x": 1030,
+        "y": 240,
+        "wires": [
+            [
+                "aae9bdea95a163f4"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "aae9bdea95a163f4",
+        "type": "api-current-state",
+        "z": "ba8902ff.b6359",
+        "name": "bedside lamp is off",
+        "server": "391f89a3.583ed6",
+        "version": 3,
+        "outputs": 2,
+        "halt_if": "off",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "light.bedside_lamp",
+        "state_type": "str",
+        "blockInputOverrides": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            }
+        ],
+        "for": 0,
+        "forType": "num",
+        "forUnits": "minutes",
+        "x": 1260,
         "y": 240,
         "wires": [
             [
@@ -1446,7 +1528,7 @@
         "for": 0,
         "forType": "num",
         "forUnits": "minutes",
-        "x": 1060,
+        "x": 1490,
         "y": 240,
         "wires": [
             [
@@ -1569,7 +1651,7 @@
         "halt_if": "off",
         "halt_if_type": "str",
         "halt_if_compare": "is",
-        "entity_id": "light.bedroom_light",
+        "entity_id": "light.bedroom_overhead_lights",
         "state_type": "str",
         "blockInputOverrides": false,
         "outputProperties": [
@@ -1604,7 +1686,7 @@
         "z": "ba8902ff.b6359",
         "name": "",
         "env": [],
-        "x": 1530,
+        "x": 1540,
         "y": 460,
         "wires": []
     },
@@ -1649,7 +1731,7 @@
         "id": "c1e0e47d.cde4a8",
         "type": "time-inject",
         "z": "ba8902ff.b6359",
-        "name": "noon + 1",
+        "name": "solar noon",
         "nameInt": "⏲ solar noon = timestamp",
         "positionConfig": "c5cbf783.6e13c8",
         "props": [
@@ -1735,7 +1817,7 @@
         "z": "ba8902ff.b6359",
         "name": "",
         "server": "391f89a3.583ed6",
-        "version": 1,
+        "version": 2,
         "outputs": 2,
         "entityId": "person.gautam",
         "entityIdFilterType": "exact",
@@ -1746,10 +1828,9 @@
         "timeout": "12",
         "timeoutType": "num",
         "timeoutUnits": "hours",
-        "entityLocation": "",
-        "entityLocationType": "none",
         "checkCurrentState": true,
         "blockInputOverrides": true,
+        "outputProperties": [],
         "x": 340,
         "y": 180,
         "wires": [
@@ -1765,27 +1846,17 @@
         "z": "ba8902ff.b6359",
         "name": "occupancy not detected 1m",
         "server": "391f89a3.583ed6",
-        "version": 4,
-        "exposeToHomeAssistant": false,
-        "haConfig": [
-            {
-                "property": "name",
-                "value": ""
-            },
-            {
-                "property": "icon",
-                "value": ""
-            }
-        ],
-        "entityidfilter": "binary_sensor.aqara_lumi_motion_ac01_occupancy",
-        "entityidfiltertype": "exact",
-        "outputinitially": false,
-        "state_type": "str",
-        "haltifstate": "off",
-        "halt_if_type": "str",
-        "halt_if_compare": "is",
+        "version": 5,
         "outputs": 2,
-        "output_only_on_state_change": true,
+        "exposeAsEntityConfig": "",
+        "entityId": "group.bedroom_occupancy",
+        "entityIdType": "exact",
+        "outputInitially": false,
+        "stateType": "str",
+        "ifState": "off",
+        "ifStateType": "str",
+        "ifStateOperator": "is",
+        "outputOnlyOnStateChange": true,
         "for": "1",
         "forType": "num",
         "forUnits": "minutes",
@@ -1829,27 +1900,17 @@
         "z": "ba8902ff.b6359",
         "name": "motion detected",
         "server": "391f89a3.583ed6",
-        "version": 4,
-        "exposeToHomeAssistant": false,
-        "haConfig": [
-            {
-                "property": "name",
-                "value": ""
-            },
-            {
-                "property": "icon",
-                "value": ""
-            }
-        ],
-        "entityidfilter": "binary_sensor.aeon_labs_zw100_multisensor_6_sensor",
-        "entityidfiltertype": "exact",
-        "outputinitially": false,
-        "state_type": "str",
-        "haltifstate": "on",
-        "halt_if_type": "str",
-        "halt_if_compare": "is",
+        "version": 5,
         "outputs": 2,
-        "output_only_on_state_change": true,
+        "exposeAsEntityConfig": "",
+        "entityId": "binary_sensor.aeon_labs_zw100_multisensor_6_sensor",
+        "entityIdType": "exact",
+        "outputInitially": false,
+        "stateType": "str",
+        "ifState": "on",
+        "ifStateType": "str",
+        "ifStateOperator": "is",
+        "outputOnlyOnStateChange": true,
         "for": "0",
         "forType": "num",
         "forUnits": "minutes",
@@ -1893,7 +1954,37 @@
         "z": "ba8902ff.b6359",
         "name": "overhead lights turned off",
         "server": "391f89a3.583ed6",
-        "version": 2,
+        "version": 4,
+        "inputs": 1,
+        "outputs": 2,
+        "exposeAsEntityConfig": "",
+        "entityId": "light.bedroom_overhead_lights",
+        "entityIdType": "exact",
+        "debugEnabled": false,
+        "constraints": [
+            {
+                "targetType": "this_entity",
+                "targetValue": "",
+                "propertyType": "current_state",
+                "propertyValue": "new_state.state",
+                "comparatorType": "is",
+                "comparatorValueDatatype": "str",
+                "comparatorValue": "off"
+            },
+            {
+                "targetType": "entity_id",
+                "targetValue": "light.bedroom_light",
+                "propertyType": "current_state",
+                "propertyValue": "new_state.state",
+                "comparatorType": "is",
+                "comparatorValueDatatype": "str",
+                "comparatorValue": "on"
+            }
+        ],
+        "customOutputs": [],
+        "outputInitially": false,
+        "stateType": "str",
+        "enableInput": true,
         "exposeToHomeAssistant": false,
         "haConfig": [
             {
@@ -1905,35 +1996,6 @@
                 "value": ""
             }
         ],
-        "entityid": "light.bedroom_overhead_lights",
-        "entityidfiltertype": "exact",
-        "debugenabled": false,
-        "constraints": [
-            {
-                "targetType": "this_entity",
-                "targetValue": "",
-                "propertyType": "current_state",
-                "comparatorType": "is",
-                "comparatorValueDatatype": "str",
-                "comparatorValue": "off",
-                "propertyValue": "new_state.state"
-            },
-            {
-                "targetType": "entity_id",
-                "targetValue": "light.bedroom_light",
-                "propertyType": "current_state",
-                "comparatorType": "is",
-                "comparatorValueDatatype": "str",
-                "comparatorValue": "on",
-                "propertyValue": "new_state.state"
-            }
-        ],
-        "inputs": 1,
-        "outputs": 2,
-        "customoutputs": [],
-        "outputinitially": false,
-        "state_type": "str",
-        "enableInput": true,
         "x": 890,
         "y": 580,
         "wires": [
@@ -2035,24 +2097,13 @@
         ]
     },
     {
-        "id": "2ee86526056ca4eb",
+        "id": "ef6284965caaf08c",
         "type": "ha-device",
         "z": "ba8902ff.b6359",
         "name": "occupancy \"enter\"",
         "server": "391f89a3.583ed6",
-        "version": 0,
-        "debugenabled": false,
-        "exposeToHomeAssistant": false,
-        "haConfig": [
-            {
-                "property": "name",
-                "value": ""
-            },
-            {
-                "property": "icon",
-                "value": ""
-            }
-        ],
+        "version": 1,
+        "exposeAsEntityConfig": "2ee86526056ca4eb",
         "inputs": 0,
         "deviceType": "trigger",
         "device": "a4628ce747aef70da5ba686f1aeeb82f",
@@ -2088,12 +2139,52 @@
         ]
     },
     {
+        "id": "801d4f06ad2a8adc",
+        "type": "inject",
+        "z": "ba8902ff.b6359",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 840,
+        "y": 380,
+        "wires": [
+            [
+                "4c156b2d.d92d74"
+            ]
+        ]
+    },
+    {
         "id": "a979de5c.73fec",
         "type": "trigger-state",
         "z": "79fa72c5.6e4ccc",
         "name": "tv changes inputs",
         "server": "391f89a3.583ed6",
-        "version": 2,
+        "version": 4,
+        "inputs": 1,
+        "outputs": 2,
+        "exposeAsEntityConfig": "",
+        "entityId": "media_player.lg_tv",
+        "entityIdType": "exact",
+        "debugEnabled": false,
+        "constraints": [],
+        "customOutputs": [],
+        "outputInitially": false,
+        "stateType": "str",
+        "enableInput": true,
         "exposeToHomeAssistant": false,
         "haConfig": [
             {
@@ -2105,16 +2196,6 @@
                 "value": ""
             }
         ],
-        "entityid": "media_player.lg_tv",
-        "entityidfiltertype": "exact",
-        "debugenabled": false,
-        "constraints": [],
-        "inputs": 1,
-        "outputs": 2,
-        "customoutputs": [],
-        "outputinitially": false,
-        "state_type": "str",
-        "enableInput": true,
         "x": 310,
         "y": 340,
         "wires": [
@@ -2135,7 +2216,7 @@
         "halt_if": "on",
         "halt_if_type": "str",
         "halt_if_compare": "is",
-        "entity_id": "light.brilliant",
+        "entity_id": "light.living_room_overhead",
         "state_type": "str",
         "blockInputOverrides": false,
         "outputProperties": [
@@ -2204,7 +2285,7 @@
         "areaId": [],
         "deviceId": [],
         "entityId": [
-            "light.brilliant"
+            "light.living_room_overhead"
         ],
         "data": "{\"brightness_pct\":\"5\"}",
         "dataType": "json",
@@ -2212,7 +2293,7 @@
         "mustacheAltTags": false,
         "outputProperties": [],
         "queue": "none",
-        "x": 1210,
+        "x": 1630,
         "y": 460,
         "wires": [
             []
@@ -2233,7 +2314,7 @@
         "entityId": [
             "light.table_lamp"
         ],
-        "data": "{\"transition\":\"3\", \"brightness_pct\": \"100\"}",
+        "data": "{\"transition\":\"5\", \"brightness_pct\": \"40\"}",
         "dataType": "json",
         "mergeContext": "",
         "mustacheAltTags": false,
@@ -2256,7 +2337,7 @@
         "halt_if": "off",
         "halt_if_type": "str",
         "halt_if_compare": "is",
-        "entity_id": "light.brilliant",
+        "entity_id": "light.living_room_overhead",
         "state_type": "str",
         "blockInputOverrides": false,
         "outputProperties": [
@@ -2306,27 +2387,17 @@
         "z": "79fa72c5.6e4ccc",
         "name": "Guest Mode Toggled",
         "server": "391f89a3.583ed6",
-        "version": 4,
-        "exposeToHomeAssistant": false,
-        "haConfig": [
-            {
-                "property": "name",
-                "value": ""
-            },
-            {
-                "property": "icon",
-                "value": ""
-            }
-        ],
-        "entityidfilter": "input_boolean.guest_mode",
-        "entityidfiltertype": "exact",
-        "outputinitially": false,
-        "state_type": "str",
-        "haltifstate": "on",
-        "halt_if_type": "str",
-        "halt_if_compare": "is",
+        "version": 5,
         "outputs": 2,
-        "output_only_on_state_change": true,
+        "exposeAsEntityConfig": "",
+        "entityId": "input_boolean.guest_mode",
+        "entityIdType": "exact",
+        "outputInitially": false,
+        "stateType": "str",
+        "ifState": "on",
+        "ifStateType": "str",
+        "ifStateOperator": "is",
+        "outputOnlyOnStateChange": true,
         "for": "0",
         "forType": "num",
         "forUnits": "minutes",
@@ -2455,8 +2526,88 @@
         "y": 460,
         "wires": [
             [
-                "2f9cf67d.87054a"
+                "1d7fe663218d4fab"
             ]
+        ]
+    },
+    {
+        "id": "1d7fe663218d4fab",
+        "type": "api-current-state",
+        "z": "79fa72c5.6e4ccc",
+        "name": "TV still off",
+        "server": "391f89a3.583ed6",
+        "version": 3,
+        "outputs": 2,
+        "halt_if": "off",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "media_player.lg_tv",
+        "state_type": "str",
+        "blockInputOverrides": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            }
+        ],
+        "for": 0,
+        "forType": "num",
+        "forUnits": "minutes",
+        "x": 1150,
+        "y": 460,
+        "wires": [
+            [
+                "f9b37123b8e5a64f"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "f9b37123b8e5a64f",
+        "type": "api-current-state",
+        "z": "79fa72c5.6e4ccc",
+        "name": "overhead lights still off",
+        "server": "391f89a3.583ed6",
+        "version": 3,
+        "outputs": 2,
+        "halt_if": "off",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "light.living_room_overhead",
+        "state_type": "str",
+        "blockInputOverrides": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            }
+        ],
+        "for": 0,
+        "forType": "num",
+        "forUnits": "minutes",
+        "x": 1390,
+        "y": 460,
+        "wires": [
+            [
+                "2f9cf67d.87054a"
+            ],
+            []
         ]
     },
     {
@@ -2466,17 +2617,17 @@
         "name": "dark hours",
         "nameInt": "",
         "positionConfig": "c5cbf783.6e13c8",
-        "startTime": "sunriseEnd",
+        "startTime": "goldenHourDuskStart",
         "startTimeType": "pdsTime",
         "startOffset": 0,
         "startOffsetType": "none",
         "startOffsetMultiplier": 60000,
-        "endTime": "nauticalDawn",
+        "endTime": "sunriseStart",
         "endTimeType": "pdsTime",
         "endOffset": 0,
         "endOffsetType": "none",
         "endOffsetMultiplier": 60000,
-        "timeRestrictions": 0,
+        "timeRestrictions": "",
         "timeRestrictionsType": "none",
         "timeDays": "*",
         "timeOnlyOddDays": false,
@@ -2645,7 +2796,7 @@
         "mustacheAltTags": false,
         "outputProperties": [],
         "queue": "none",
-        "x": 1450,
+        "x": 1670,
         "y": 540,
         "wires": [
             []
@@ -2687,7 +2838,7 @@
         "override_payload": "msg",
         "entity_location": "data",
         "override_data": "msg",
-        "x": 970,
+        "x": 1210,
         "y": 540,
         "wires": [
             [
@@ -2717,7 +2868,7 @@
         "checkall": "false",
         "repair": false,
         "outputs": 2,
-        "x": 1200,
+        "x": 1440,
         "y": 540,
         "wires": [
             [
@@ -2749,8 +2900,48 @@
         "y": 540,
         "wires": [
             [
-                "e9262b2469ae22a8"
+                "3b12eec4cfa0c1d9"
             ]
+        ]
+    },
+    {
+        "id": "3b12eec4cfa0c1d9",
+        "type": "api-current-state",
+        "z": "79fa72c5.6e4ccc",
+        "name": "TV still off",
+        "server": "391f89a3.583ed6",
+        "version": 3,
+        "outputs": 2,
+        "halt_if": "off",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "media_player.lg_tv",
+        "state_type": "str",
+        "blockInputOverrides": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            }
+        ],
+        "for": 0,
+        "forType": "num",
+        "forUnits": "minutes",
+        "x": 990,
+        "y": 540,
+        "wires": [
+            [
+                "e9262b2469ae22a8"
+            ],
+            []
         ]
     },
     {
@@ -2758,7 +2949,7 @@
         "type": "time-inject",
         "z": "79fa72c5.6e4ccc",
         "name": "9am",
-        "nameInt": "⏲ 09:00 = \"\"",
+        "nameInt": "⏲ 09:00[Sat,Sun] = \"\"",
         "positionConfig": "c5cbf783.6e13c8",
         "props": [
             {
@@ -2806,6 +2997,8 @@
         "intervalCount": 1,
         "intervalCountType": "num",
         "intervalCountMultiplier": 60000,
+        "cron": "",
+        "cronType": "cronexpr",
         "time": "09:00",
         "timeType": "entered",
         "offset": 0,
@@ -2816,7 +3009,7 @@
         "timeEndOffset": 0,
         "timeEndOffsetType": "none",
         "timeEndOffsetMultiplier": 60000,
-        "timeDays": "*",
+        "timeDays": "6,0",
         "timeOnlyOddDays": false,
         "timeOnlyEvenDays": false,
         "timeOnlyOddWeeks": false,
@@ -3094,101 +3287,30 @@
         ]
     },
     {
-        "id": "5ab0c9120ec56d28",
-        "type": "within-time-switch",
-        "z": "79fa72c5.6e4ccc",
-        "name": "weekday 9am-8pm",
-        "nameInt": "",
-        "positionConfig": "c5cbf783.6e13c8",
-        "startTime": "09:00",
-        "startTimeType": "entered",
-        "startOffset": 0,
-        "startOffsetType": "none",
-        "startOffsetMultiplier": 60000,
-        "endTime": "18:00",
-        "endTimeType": "entered",
-        "endOffset": 0,
-        "endOffsetType": "none",
-        "endOffsetMultiplier": 60000,
-        "timeRestrictions": 0,
-        "timeRestrictionsType": "none",
-        "timeDays": "1,2,3,4,5",
-        "timeOnlyOddDays": false,
-        "timeOnlyEvenDays": false,
-        "timeOnlyOddWeeks": false,
-        "timeOnlyEvenWeeks": false,
-        "timeMonths": "*",
-        "timedatestart": "",
-        "timedateend": "",
-        "propertyStart": "",
-        "propertyStartType": "none",
-        "propertyStartCompare": "true",
-        "propertyStartThreshold": "",
-        "propertyStartThresholdType": "num",
-        "startTimeAlt": "",
-        "startTimeAltType": "none",
-        "startOffsetAlt": 0,
-        "startOffsetAltType": "none",
-        "startOffsetAltMultiplier": 60000,
-        "propertyEnd": "",
-        "propertyEndType": "none",
-        "propertyEndCompare": "true",
-        "propertyEndThreshold": "",
-        "propertyEndThresholdType": "num",
-        "endTimeAlt": "",
-        "endTimeAltType": "none",
-        "endOffsetAlt": 0,
-        "endOffsetAltType": "none",
-        "endOffsetAltMultiplier": 60000,
-        "withinTimeValue": "true",
-        "withinTimeValueType": "msgInput",
-        "outOfTimeValue": "false",
-        "outOfTimeValueType": "msgInput",
-        "tsCompare": "0",
-        "x": 530,
-        "y": 980,
-        "wires": [
-            [
-                "1d3c6db90b88656f"
-            ],
-            []
-        ]
-    },
-    {
         "id": "07bbfbb993eb7970",
         "type": "server-state-changed",
         "z": "79fa72c5.6e4ccc",
-        "name": "not_home for 30 mins",
+        "name": "away for 30 mins",
         "server": "391f89a3.583ed6",
-        "version": 4,
-        "exposeToHomeAssistant": false,
-        "haConfig": [
-            {
-                "property": "name",
-                "value": ""
-            },
-            {
-                "property": "icon",
-                "value": ""
-            }
-        ],
-        "entityidfilter": "person.gautam",
-        "entityidfiltertype": "exact",
-        "outputinitially": false,
-        "state_type": "str",
-        "haltifstate": "not_home",
-        "halt_if_type": "str",
-        "halt_if_compare": "is",
+        "version": 5,
         "outputs": 2,
-        "output_only_on_state_change": true,
+        "exposeAsEntityConfig": "",
+        "entityId": "person.gautam",
+        "entityIdType": "exact",
+        "outputInitially": false,
+        "stateType": "str",
+        "ifState": "home",
+        "ifStateType": "str",
+        "ifStateOperator": "is_not",
+        "outputOnlyOnStateChange": true,
         "for": "30",
         "forType": "num",
         "forUnits": "minutes",
         "ignorePrevStateNull": true,
-        "ignorePrevStateUnknown": true,
-        "ignorePrevStateUnavailable": true,
-        "ignoreCurrentStateUnknown": false,
-        "ignoreCurrentStateUnavailable": false,
+        "ignorePrevStateUnknown": false,
+        "ignorePrevStateUnavailable": false,
+        "ignoreCurrentStateUnknown": true,
+        "ignoreCurrentStateUnavailable": true,
         "outputProperties": [
             {
                 "property": "payload",
@@ -3213,7 +3335,66 @@
         "y": 980,
         "wires": [
             [
-                "5ab0c9120ec56d28"
+                "6ee0a4a15f19b4da"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "6ee0a4a15f19b4da",
+        "type": "function",
+        "z": "79fa72c5.6e4ccc",
+        "name": "left home for 30 mins",
+        "func": "const oldState = msg.data?.old_state?.state;\nconst newState = msg.data?.new_state?.state ?? msg.payload;\nif ([\"home\", \"unknown\", \"unavailable\"].includes(oldState) && ![\"home\", \"unknown\", \"unavailable\"].includes(newState)) {\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 570,
+        "y": 980,
+        "wires": [
+            [
+                "aab2970f5c3e49d1"
+            ]
+        ]
+    },
+    {
+        "id": "aab2970f5c3e49d1",
+        "type": "api-current-state",
+        "z": "79fa72c5.6e4ccc",
+        "name": "guest mode off",
+        "server": "391f89a3.583ed6",
+        "version": 3,
+        "outputs": 2,
+        "halt_if": "off",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_boolean.guest_mode",
+        "state_type": "str",
+        "blockInputOverrides": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            }
+        ],
+        "for": 0,
+        "forType": "num",
+        "forUnits": "minutes",
+        "x": 820,
+        "y": 980,
+        "wires": [
+            [
+                "1d3c6db90b88656f"
             ],
             []
         ]
@@ -3285,33 +3466,92 @@
         "y": 1040,
         "wires": [
             [
-                "8047431b402be953"
+                "b1cde1de5894b9e9"
             ],
             []
         ]
     },
     {
-        "id": "8047431b402be953",
-        "type": "switch",
+        "id": "db1500e3b6a7a4f0",
+        "type": "trigger-state",
         "z": "79fa72c5.6e4ccc",
-        "name": "on for > 30 mins",
-        "property": "data.timeSinceChangedMs",
-        "propertyType": "msg",
-        "rules": [
+        "name": "",
+        "server": "391f89a3.583ed6",
+        "version": 4,
+        "inputs": 0,
+        "outputs": 2,
+        "exposeAsEntityConfig": "",
+        "entityId": "media_player.shield_2",
+        "entityIdType": "exact",
+        "debugEnabled": false,
+        "constraints": [
             {
-                "t": "gt",
-                "v": "1800000",
+                "targetType": "this_entity",
+                "targetValue": "",
+                "propertyType": "current_state",
+                "propertyValue": "new_state.state",
+                "comparatorType": "is",
+                "comparatorValueDatatype": "str",
+                "comparatorValue": "on"
+            },
+            {
+                "targetType": "this_entity",
+                "targetValue": "",
+                "propertyType": "property",
+                "propertyValue": "new_state.attributes.app_name",
+                "comparatorType": "is",
+                "comparatorValueDatatype": "str",
+                "comparatorValue": "com.plexapp.android"
+            },
+            {
+                "targetType": "this_entity",
+                "targetValue": "",
+                "propertyType": "property",
+                "propertyValue": "old_state.attributes.app_name",
+                "comparatorType": "is_not",
+                "comparatorValueDatatype": "str",
+                "comparatorValue": "com.plexapp.android"
+            }
+        ],
+        "customOutputs": [],
+        "outputInitially": false,
+        "stateType": "str",
+        "enableInput": false,
+        "x": 540,
+        "y": 300,
+        "wires": [
+            [
+                "5f3a0448.3348ec"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "3f4a24cefc6c890b",
+        "type": "inject",
+        "z": "79fa72c5.6e4ccc",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
                 "vt": "str"
             }
         ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 1,
-        "x": 620,
-        "y": 1040,
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1140,
+        "y": 660,
         "wires": [
             [
-                "b1cde1de5894b9e9"
+                "b7ede1fc.b6954"
             ]
         ]
     },
@@ -3323,14 +3563,14 @@
         "server": "391f89a3.583ed6",
         "version": 5,
         "debugenabled": false,
-        "domain": "switch",
+        "domain": "light",
         "service": "turn_on",
         "areaId": [],
         "deviceId": [],
         "entityId": [
-            "switch.entryway_light"
+            "light.entryway_light"
         ],
-        "data": "",
+        "data": "{\"transition\":2, \"brightness_pct\": 30}",
         "dataType": "json",
         "mergeContext": "",
         "mustacheAltTags": false,
@@ -3348,8 +3588,8 @@
         "id": "bd529406.6df2c8",
         "type": "function",
         "z": "5d61e676.b8f7c8",
-        "name": "not home",
-        "func": "for (var idx in msg.payload) {\n    if (msg.payload[idx].state == \"not_home\") {\n        return msg;\n    }\n}",
+        "name": "away in last 3 mins",
+        "func": "const states = msg.payload || [];\nif (states.some(({ state }) => ![\"home\", \"unknown\", \"unavailable\"].includes(state))) {\n    return msg;\n}",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -3366,19 +3606,19 @@
         "id": "c2ced6fc.1f6f28",
         "type": "api-get-history",
         "z": "5d61e676.b8f7c8",
-        "name": "presence last 2 mins",
+        "name": "presence last 3 mins",
         "server": "391f89a3.583ed6",
-        "version": 0,
-        "startdate": "",
-        "enddate": "",
-        "entityid": "person.gautam",
-        "entityidtype": "is",
+        "version": 1,
+        "startDate": "",
+        "endDate": "",
+        "entityId": "person.gautam",
+        "entityIdType": "equals",
         "useRelativeTime": true,
         "relativeTime": "3 minutes",
         "flatten": true,
-        "output_type": "array",
-        "output_location_type": "msg",
-        "output_location": "payload",
+        "outputType": "array",
+        "outputLocationType": "msg",
+        "outputLocation": "payload",
         "x": 920,
         "y": 700,
         "wires": [
@@ -3391,37 +3631,27 @@
         "id": "d8a3a07c.8d65c",
         "type": "server-state-changed",
         "z": "5d61e676.b8f7c8",
-        "name": "someone leaves home",
+        "name": "left home for 2 mins",
         "server": "391f89a3.583ed6",
-        "version": 4,
-        "exposeToHomeAssistant": false,
-        "haConfig": [
-            {
-                "property": "name",
-                "value": ""
-            },
-            {
-                "property": "icon",
-                "value": ""
-            }
-        ],
-        "entityidfilter": "person.gautam",
-        "entityidfiltertype": "exact",
-        "outputinitially": false,
-        "state_type": "str",
-        "haltifstate": "not_home",
-        "halt_if_type": "str",
-        "halt_if_compare": "is",
+        "version": 5,
         "outputs": 2,
-        "output_only_on_state_change": true,
+        "exposeAsEntityConfig": "",
+        "entityId": "person.gautam",
+        "entityIdType": "exact",
+        "outputInitially": false,
+        "stateType": "str",
+        "ifState": "home",
+        "ifStateType": "str",
+        "ifStateOperator": "is_not",
+        "outputOnlyOnStateChange": true,
         "for": "2",
         "forType": "num",
         "forUnits": "minutes",
         "ignorePrevStateNull": true,
-        "ignorePrevStateUnknown": true,
-        "ignorePrevStateUnavailable": true,
-        "ignoreCurrentStateUnknown": false,
-        "ignoreCurrentStateUnavailable": false,
+        "ignorePrevStateUnknown": false,
+        "ignorePrevStateUnavailable": false,
+        "ignoreCurrentStateUnknown": true,
+        "ignoreCurrentStateUnavailable": true,
         "outputProperties": [
             {
                 "property": "payload",
@@ -3446,9 +3676,28 @@
         "y": 780,
         "wires": [
             [
-                "58ed0332.c37c1c"
+                "be49ebc1739fab52"
             ],
             []
+        ]
+    },
+    {
+        "id": "be49ebc1739fab52",
+        "type": "function",
+        "z": "5d61e676.b8f7c8",
+        "name": "left home for 2 mins",
+        "func": "const oldState = msg.data?.old_state?.state;\nconst newState = msg.data?.new_state?.state ?? msg.payload;\nif ([\"home\", \"unknown\", \"unavailable\"].includes(oldState) && ![\"home\", \"unknown\", \"unavailable\"].includes(newState)) {\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 860,
+        "y": 780,
+        "wires": [
+            [
+                "58ed0332.c37c1c"
+            ]
         ]
     },
     {
@@ -3623,19 +3872,19 @@
         "id": "afffe4217dc28f74",
         "type": "api-get-history",
         "z": "5d61e676.b8f7c8",
-        "name": "entry light last 2 mins",
+        "name": "entry light last 1 min",
         "server": "391f89a3.583ed6",
-        "version": 0,
-        "startdate": "",
-        "enddate": "",
-        "entityid": "switch.entryway_light",
-        "entityidtype": "is",
+        "version": 1,
+        "startDate": "",
+        "endDate": "",
+        "entityId": "switch.entryway_light",
+        "entityIdType": "equals",
         "useRelativeTime": true,
         "relativeTime": "1 minutes",
         "flatten": true,
-        "output_type": "array",
-        "output_location_type": "msg",
-        "output_location": "payload",
+        "outputType": "array",
+        "outputLocationType": "msg",
+        "outputLocation": "payload",
         "x": 920,
         "y": 640,
         "wires": [
@@ -3680,15 +3929,15 @@
         "server": "391f89a3.583ed6",
         "version": 5,
         "debugenabled": false,
-        "domain": "switch",
+        "domain": "light",
         "service": "turn_on",
         "areaId": [],
         "deviceId": [],
         "entityId": [
-            "switch.kitchen_overhead_lights"
+            "light.kitchen_overhead_lights"
         ],
-        "data": "",
-        "dataType": "json",
+        "data": "{\"transition\":2, \"brightness_pct\": 30}",
+        "dataType": "jsonata",
         "mergeContext": "",
         "mustacheAltTags": false,
         "outputProperties": [],
@@ -3703,6 +3952,7 @@
         "id": "21d159331f8f3e29",
         "type": "api-call-service",
         "z": "5d61e676.b8f7c8",
+        "d": true,
         "name": "Set ecobee away",
         "server": "391f89a3.583ed6",
         "version": 5,
@@ -3732,27 +3982,17 @@
         "z": "5d61e676.b8f7c8",
         "name": "someone comes home",
         "server": "391f89a3.583ed6",
-        "version": 4,
-        "exposeToHomeAssistant": false,
-        "haConfig": [
-            {
-                "property": "name",
-                "value": ""
-            },
-            {
-                "property": "icon",
-                "value": ""
-            }
-        ],
-        "entityidfilter": "person.gautam",
-        "entityidfiltertype": "exact",
-        "outputinitially": false,
-        "state_type": "str",
-        "haltifstate": "home",
-        "halt_if_type": "str",
-        "halt_if_compare": "is",
+        "version": 5,
         "outputs": 2,
-        "output_only_on_state_change": true,
+        "exposeAsEntityConfig": "",
+        "entityId": "person.gautam",
+        "entityIdType": "exact",
+        "outputInitially": false,
+        "stateType": "str",
+        "ifState": "home",
+        "ifStateType": "str",
+        "ifStateOperator": "is",
+        "outputOnlyOnStateChange": true,
         "for": "",
         "forType": "num",
         "forUnits": "minutes",
@@ -3785,7 +4025,7 @@
         "y": 900,
         "wires": [
             [
-                "a2f6114f1aaf2d8d"
+                "de6058150355835e"
             ],
             []
         ]
@@ -3794,6 +4034,7 @@
         "id": "a2f6114f1aaf2d8d",
         "type": "api-call-service",
         "z": "5d61e676.b8f7c8",
+        "d": true,
         "name": "Resume ecobee schedule",
         "server": "391f89a3.583ed6",
         "version": 5,
@@ -3809,31 +4050,20 @@
         "mustacheAltTags": false,
         "outputProperties": [],
         "queue": "none",
-        "x": 890,
+        "x": 1050,
         "y": 900,
         "wires": [
             []
         ]
     },
     {
-        "id": "a3ed09efdfba9cc0",
+        "id": "9f53b21407ca024f",
         "type": "ha-device",
         "z": "5d61e676.b8f7c8",
         "name": "front door opened",
         "server": "391f89a3.583ed6",
-        "version": 0,
-        "debugenabled": false,
-        "exposeToHomeAssistant": false,
-        "haConfig": [
-            {
-                "property": "name",
-                "value": ""
-            },
-            {
-                "property": "icon",
-                "value": ""
-            }
-        ],
+        "version": 1,
+        "exposeAsEntityConfig": "a3ed09efdfba9cc0",
         "inputs": 0,
         "deviceType": "trigger",
         "device": "2c0f139b3ce74a96bbeca6dc6ff7806d",
@@ -3841,7 +4071,7 @@
             "type": "opened",
             "platform": "device",
             "device_id": "2c0f139b3ce74a96bbeca6dc6ff7806d",
-            "entity_id": "binary_sensor.front_door",
+            "entity_id": "9bcb5e93ab4b4e888ac9ed965420d3cc",
             "domain": "binary_sensor",
             "metadata": {
                 "secondary": false
@@ -3868,6 +4098,46 @@
             [
                 "5c9cfd78.ca2584"
             ]
+        ]
+    },
+    {
+        "id": "de6058150355835e",
+        "type": "api-current-state",
+        "z": "5d61e676.b8f7c8",
+        "name": "guest mode off",
+        "server": "391f89a3.583ed6",
+        "version": 3,
+        "outputs": 2,
+        "halt_if": "off",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_boolean.guest_mode",
+        "state_type": "str",
+        "blockInputOverrides": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            }
+        ],
+        "for": 0,
+        "forType": "num",
+        "forUnits": "minutes",
+        "x": 840,
+        "y": 900,
+        "wires": [
+            [
+                "a2f6114f1aaf2d8d"
+            ],
+            []
         ]
     }
 ]
