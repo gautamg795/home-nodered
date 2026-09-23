@@ -2491,7 +2491,7 @@
         "type": "function",
         "z": "79fa72c5.6e4ccc",
         "name": "turning on / switching to Netflix",
-        "func": "if ((msg.data.event.old_state.state == \"off\" || msg.data.event.old_state.attributes.source != msg.data.event.new_state.attributes.source) && (msg.data.event.new_state.attributes.source == \"Netflix\" || msg.data.event.new_state.attributes.source == \"Plex\")) return msg;",
+        "func": "// trigger-state places the HA state event under msg.data.event.\nconst event = msg.data?.event;\nconst oldState = event?.old_state;\nconst newSource = event?.new_state?.attributes?.source;\n\nif ((newSource === \"Netflix\" || newSource === \"Plex\") &&\n    (!oldState || oldState.state === \"off\" ||\n     oldState.attributes?.source !== newSource)) {\n    return msg;\n}\nreturn null;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
