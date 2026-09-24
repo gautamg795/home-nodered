@@ -3,11 +3,13 @@
     "description": "A Node-RED Project",
     "version": "0.0.1",
     "dependencies": {
-        "node-red-contrib-boolean-logic-ultimate": "1.0.20",
+        "node-red-contrib-boolean-logic-ultimate": "1.2.19",
         "node-red-contrib-dsm": "0.14.1",
-        "node-red-contrib-home-assistant-websocket": "0.25.1",
-        "node-red-contrib-sun-position": "1.1.7",
-        "node-red-contrib-time-range-switch": "1.0.0"
+        "node-red-contrib-home-assistant-websocket": "0.80.3",
+        "node-red-contrib-queue-gate": "1.5.5",
+        "node-red-contrib-sun-position": "3.0.1",
+        "node-red-contrib-time-based-dimmer": "0.8.2",
+        "node-red-contrib-time-range-switch": "1.2.0"
     },
     "node-red": {
         "settings": {
